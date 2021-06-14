@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShopOnline.Data.Configurations;
 using ShopOnline.Data.Entities;
-
+using ShopOnline.Data.Extension;
 
 namespace ShopOnline.Data.EF
 {
@@ -31,6 +31,9 @@ namespace ShopOnline.Data.EF
             modelBuilder.ApplyConfiguration(new TransactionConfi());
 
             //base.OnModelCreating(modelBuilder);
+
+            //data seeding
+            modelBuilder.Seed();
         }
 
         public DbSet<Product> Products { get; set; }
