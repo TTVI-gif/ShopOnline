@@ -1,11 +1,11 @@
-﻿using ShopOnline.Enums;
+﻿using ShopOnline.Data.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ShopOnline.Data.Entities
 {
-   public class Order
+    public class Order
     {
         public int Id { set; get; }
         public DateTime OrderDate { set; get; }

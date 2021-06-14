@@ -1,13 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ShopOnline.Data.Entities;
-using ShopOnline.Entiiies;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace ShopOnline.Configurations
+
+namespace ShopOnline.Data.Configurations
 {
     public class OrderConfi : IEntityTypeConfiguration<Order>
 
@@ -22,7 +18,7 @@ namespace ShopOnline.Configurations
             builder.Property(x => x.ShipAddress).HasMaxLength(200).IsRequired();
             builder.Property(x => x.ShipName).HasMaxLength(30).IsRequired();
             builder.Property(x => x.ShipPhoneNumber).HasMaxLength(10).IsRequired();
-            
+
         }
     }
 }
