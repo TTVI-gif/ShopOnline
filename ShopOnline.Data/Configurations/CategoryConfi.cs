@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ShopOnline.Entiiies;
-using ShopOnline.Enums;
+using ShopOnline.Data.Entities;
+using ShopOnline.Data.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ShopOnline.Configurations
+namespace ShopOnline.Data.Configurations
 {
     public class CategoryConfi : IEntityTypeConfiguration<Category>
     {

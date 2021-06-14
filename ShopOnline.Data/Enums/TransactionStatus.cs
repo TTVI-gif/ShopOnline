@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ShopOnline.Enums
+namespace ShopOnline.Data.Enums
 {
     public enum TransactionStatus
     {
-        Success, 
+        Success,
         Failed
     }
 }
