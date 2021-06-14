@@ -18,6 +18,7 @@ namespace ShopOnline.Data.Configurations
             builder.Property(x => x.ShipAddress).HasMaxLength(200).IsRequired();
             builder.Property(x => x.ShipName).HasMaxLength(30).IsRequired();
             builder.Property(x => x.ShipPhoneNumber).HasMaxLength(10).IsRequired();
+            builder.HasOne(x => x.AppUser).WithMany(x => x.Orders).HasForeignKey(x => x.UserId);
 
         }
     }

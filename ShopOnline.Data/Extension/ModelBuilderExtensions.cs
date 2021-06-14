@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using ShopOnline.Data.Entities;
 using System;
 
@@ -80,7 +81,7 @@ namespace ShopOnline.Data.Extension
                         Details = "Viet Tien Men T-Shirt",
                         Description = "Viet Tien Men T-Shirt"
                     });
-            /*modelBuilder.Entity<ProductInCategory>().HasData(
+            modelBuilder.Entity<ProductInCategory>().HasData(
                 new ProductInCategory() { ProductId = 1, CategoryId = 1 }
                 );
             var roleId = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DC");
@@ -114,7 +115,7 @@ namespace ShopOnline.Data.Extension
                 RoleId = roleId,
                 UserId = adminId
             });
-*/
+
         }
     }
 }
