@@ -6,7 +6,7 @@ using System.IO;
 
 namespace ShopOnline.Data.EF
 {
-    class EShopDbContextFactory : IDesignTimeDbContextFactory<EshopDbContext>
+    public class EShopDbContextFactory : IDesignTimeDbContextFactory<EshopDbContext>
     {
         public EshopDbContext CreateDbContext(string[] args)
         {
@@ -15,10 +15,10 @@ namespace ShopOnline.Data.EF
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            var connectionString = configuration.GetConnectionString("ShopOnline");
+            var connection = configuration.GetConnectionString("eShopSolution");
 
             var optionsBuilder = new DbContextOptionsBuilder<EshopDbContext>();
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseSqlServer(connection);
 
             return new EshopDbContext(optionsBuilder.Options);
         }
