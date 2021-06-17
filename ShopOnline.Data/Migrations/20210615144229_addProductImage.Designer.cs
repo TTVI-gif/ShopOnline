@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopOnline.Data.EF;
 
 namespace ShopOnline.Data.Migrations
 {
     [DbContext(typeof(EshopDbContext))]
-    partial class EshopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210615144229_addProductImage")]
+    partial class addProductImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -180,7 +182,7 @@ namespace ShopOnline.Data.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "21800f14-3dda-4b50-bd41-e4322bfca385",
+                            ConcurrencyStamp = "3b3e0151-0dfc-4182-984d-02e694cdbde2",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -257,14 +259,14 @@ namespace ShopOnline.Data.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ca6e7f28-5bc9-4e15-aed4-e1ef1a0d01cf",
+                            ConcurrencyStamp = "d117bcf7-c680-4498-ae40-9340504432f1",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "tedu.international@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "tedu.international@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKdndsDdf9xgr4cILUkng5oQS2QUAw+m8VlvpkWt5CKXShIrXNxF2qdSkdQlFtlwKQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKoQPYt9vDk4SscngtD6GevSRA8uBCST2GAvMa+vyS9dRUeiImizvXpwLB9FLRgxyA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -613,7 +615,7 @@ namespace ShopOnline.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2021, 6, 15, 22, 43, 0, 958, DateTimeKind.Local).AddTicks(7501),
+                            DateCreated = new DateTime(2021, 6, 15, 21, 42, 28, 610, DateTimeKind.Local).AddTicks(4793),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,

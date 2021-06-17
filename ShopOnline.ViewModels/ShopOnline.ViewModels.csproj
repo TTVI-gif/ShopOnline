@@ -5,13 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-	  <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ShopOnline.Data\ShopOnline.Data.csproj" />
-    <ProjectReference Include="..\ShopOnline.Utilities\ShopOnline.Utilities.csproj" />
-    <ProjectReference Include="..\ShopOnline.ViewModels\ShopOnline.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
