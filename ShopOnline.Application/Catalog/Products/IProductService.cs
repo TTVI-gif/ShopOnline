@@ -20,6 +20,8 @@ namespace ShopOnline.Application.Catalog
 
         Task AddViewcount(int productId);
 
+        Task<ProductViewModel> GetById(int productId, string languageId);
+
         Task<PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request);
 
         Task<PagedResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request);

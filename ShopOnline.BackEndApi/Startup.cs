@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShopOnline.Application.Catalog;
 using ShopOnline.Application.Catalog.Products;
+using ShopOnline.Application.Common;
 using ShopOnline.Data.EF;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ namespace ShopOnline.BackEndApi
             services.AddDbContext<EshopDbContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("eShopSolution")));
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IStorageService, FileStorageService>();
             services.AddSwaggerGen();
             services.AddControllersWithViews();
         }
