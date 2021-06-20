@@ -30,7 +30,7 @@ namespace ShopOnline.BackEndApi.Controllers
         [HttpGet("{productId}/{languageId}")]
         public async Task<IActionResult> GetById(int productId, string languageId)
             {
-            var product = await _productService.GetById(productId, languageId);
+            var product = await _productService.GetbyId(productId, languageId);
             if (product == null)
                 return BadRequest("Cannot find product");
             return Ok(product);
@@ -44,7 +44,7 @@ namespace ShopOnline.BackEndApi.Controllers
             var result = await _productService.Create(request);
             if (result == 0)
                 return BadRequest();
-            var product = await _productService.GetById(result, request.LanguageId);
+            var product = await _productService.GetbyId(result, request.LanguageId);
             return CreatedAtAction(nameof(GetById), new { id = result }, product);
         }
 
