@@ -14,17 +14,17 @@ namespace ShopOnline.Application.Catalog
 
         Task<int> Delete(int productId);
 
+        Task<ProductViewModel> GetbyId(int productId, string languageId);
+
         Task<bool> UpdatePrice(int productId, decimal newPrice);
 
         Task<bool> UpdateStock(int productId, int addedQuantity);
 
         Task AddViewcount(int productId);
 
-        Task<ProductViewModel> GetById(int productId, string languageId);
-
         Task<PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request);
 
-        Task<PagedResult<ProductViewModel>> GetAllByCategoryId(string languageId, GetPublicProductPagingRequest request);
+        Task<PagedResult<ProductViewModel>> GetAllByCategoryId(string laguageId, GetPublicProductPagingRequest request);
 
         Task<int> AddImage(int productId, ProductImageCreateRequest request);
 
@@ -32,7 +32,7 @@ namespace ShopOnline.Application.Catalog
 
         Task<int> UpdateImage(int imageId, ProductImageUpdateRequest request);
 
-        Task<ProductImageViewModel> GetImageById(int imageId);
+        Task<ProductImageViewModel> getImageById(int imageId);
 
         Task<List<ProductImageViewModel>> GetListImage(int productId);
     }
