@@ -20,9 +20,11 @@ namespace ShopOnline.Application.Catalog
 
         Task AddViewcount(int productId);
 
+        Task<ProductViewModel> GetById(int productId, string languageId);
+
         Task<PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request);
 
-        Task<PagedResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request);
+        Task<PagedResult<ProductViewModel>> GetAllByCategoryId(string languageId, GetPublicProductPagingRequest request);
 
         Task<int> AddImage(int productId, ProductImageCreateRequest request);
 
@@ -30,7 +32,7 @@ namespace ShopOnline.Application.Catalog
 
         Task<int> UpdateImage(int imageId, ProductImageUpdateRequest request);
 
-        Task<ProductImageViewModel> getImageById(int imageId);
+        Task<ProductImageViewModel> GetImageById(int imageId);
 
         Task<List<ProductImageViewModel>> GetListImage(int productId);
     }
