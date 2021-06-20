@@ -20,9 +20,10 @@ namespace ShopOnline.Application.Catalog.Products
     {
         private readonly EshopDbContext _context;
         private readonly IStorageService _storageService;
-        public ProductService(EshopDbContext context)
+        public ProductService(EshopDbContext context, IStorageService storageService)
         {
             _context = context;
+            _storageService = storageService;
         }
 
         public async Task<int> AddImage(int productId, ProductImageCreateRequest request)
@@ -110,7 +111,7 @@ namespace ShopOnline.Application.Catalog.Products
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<PagedResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request)
+        public async Task<PagedResult<ProductViewModel>> GetAllByCategoryId(string languageId,  GetPublicProductPagingRequest request)
         {
             //1. Select join
             var query = from p in _context.Products
@@ -153,6 +154,8 @@ namespace ShopOnline.Application.Catalog.Products
             };
             return pagedResult;
         }
+
+       
 
         public async Task<PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request)
         {
@@ -226,7 +229,7 @@ namespace ShopOnline.Application.Catalog.Products
             return productViewModel;
         }
 
-        public async Task<ProductImageViewModel> getImageById(int imageId)
+        public async Task<ProductImageViewModel> GetImageById(int imageId)
         {
             var image = await _context.ProductImages.FindAsync(imageId);
             if (image == null) throw new EshopSolutonException($"Can not find image with id: {imageId}");

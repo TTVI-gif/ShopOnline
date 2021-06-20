@@ -31,6 +31,7 @@ namespace ShopOnline.BackEndApi
             services.AddDbContext<EshopDbContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("eShopSolution")));
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<ProductService, ProductService>();
             services.AddTransient<IStorageService, FileStorageService>();
             services.AddSwaggerGen();
             services.AddControllersWithViews();
