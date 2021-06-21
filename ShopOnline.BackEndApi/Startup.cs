@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,7 +9,9 @@ using Microsoft.Extensions.Hosting;
 using ShopOnline.Application.Catalog;
 using ShopOnline.Application.Catalog.Products;
 using ShopOnline.Application.Common;
+using ShopOnline.Application.System.Users;
 using ShopOnline.Data.EF;
+using ShopOnline.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,10 +33,20 @@ namespace ShopOnline.BackEndApi
         {
             services.AddDbContext<EshopDbContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("eShopSolution")));
+
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ProductService, ProductService>();
+            services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
+            services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
+            services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<IStorageService, FileStorageService>();
+            services.AddTransient<IUserService, UserService>();
             services.AddSwaggerGen();
+            services.AddIdentity<AppUser, AppRole>()
+                .AddEntityFrameworkStores<EshopDbContext>()
+                .AddDefaultTokenProviders();
+
+         
             services.AddControllersWithViews();
         }
 
