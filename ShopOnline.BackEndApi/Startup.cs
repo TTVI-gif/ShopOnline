@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,6 +15,7 @@ using ShopOnline.Application.Common;
 using ShopOnline.Application.System.Users;
 using ShopOnline.Data.EF;
 using ShopOnline.Data.Entities;
+using ShopOnline.ViewModels.System.Users;
 using System.Collections.Generic;
 
 namespace ShopOnline.BackEndApi
@@ -38,9 +40,10 @@ namespace ShopOnline.BackEndApi
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
-            services.AddTransient<RoleManager<AppRole>,RoleManager<AppRole>>();
+            services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddSwaggerGen();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddFluentValidation()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
             services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<EshopDbContext>()
                 .AddDefaultTokenProviders();
