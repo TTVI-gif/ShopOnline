@@ -22,7 +22,7 @@ namespace ShopOnline.BackEndApi.Controllers
 
         [HttpPost("Authenticate")]
         [AllowAnonymous]
-        public async Task<IActionResult> Authenticate([FromForm] LoginRequest request)
+        public async Task<IActionResult> Authenticate([FromBody] LoginRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -31,12 +31,12 @@ namespace ShopOnline.BackEndApi.Controllers
             {
                 return BadRequest("UserName or PassWord is incorrect");
             }
-            return Ok(new { token = resultToken });
+            return Ok(resultToken );
         }
 
         [HttpPost("Register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register([FromForm] RegisterRequest request)
+        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var result = await _userService.Register(request);
@@ -45,6 +45,13 @@ namespace ShopOnline.BackEndApi.Controllers
                 return BadRequest("Register is fail");
             }
             return Ok();
+        }
+
+        [HttpGet("paging")]
+        public async Task<IActionResult> GetUserPaging([FromQuery]GetUserPagingRequest request)
+        {
+            var user = await _userService.GetUserPaging(request);
+            return Ok(user);
         }
     }
 }
