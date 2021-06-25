@@ -94,18 +94,16 @@ namespace ShopOnline.Application.System.Users
 
         public async Task<bool> Register(RegisterRequest request)
         {
-            var user = new AppUser()
+            var user11 = new AppUser()
             {
                 firstName = request.firstName,
                 lastName = request.lastName,
                 Dob =request.Dob,
                 Email = request.Email,
                 PhoneNumber = request.PhoneNumber,
-                UserName = request.UserName,
-               
-                
+                UserName = request.UserName
             };
-            var result = await _userManager.CreateAsync(user, request.PassWord);
+            var result = await _userManager.CreateAsync(user11, request.PassWord);
             if(result.Succeeded)
             {
                 return true;

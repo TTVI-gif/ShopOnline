@@ -9,5 +9,7 @@ namespace ShopOnline.AdminApp.Services
         Task<string> Autheticate(LoginRequest request);
 
         Task<PagedResult<UserViewModel>> GetUsersPaging(GetUserPagingRequest request);
+
+        Task<bool> RegisterUser(RegisterRequest request);
     }
 }

@@ -30,17 +30,7 @@ namespace ShopOnline.AdminApp.Services
             return token;
         }
 
-        /*public async Task<PagedResult<UserViewModel>> GetUsersPaging(GetUserPagingRequest request)
-        {
-            var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri("http://localhost:5000");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", request.BearerToken);
-            var repose = await client.GetAsync($"/api/users/paging?pageIndex=" +
-                $"{request.PageIndex} & pageSize={request.PageSize}$&keyword={request.KeyWord}");
-            var token = await repose.Content.ReadAsStringAsync();
-            var user = JsonConvert.DeserializeObject<PagedResult<UserViewModel>>(token);
-            return user;
-        }*/
+        
 
         public async Task<PagedResult<UserViewModel>> GetUsersPaging(GetUserPagingRequest request)
         {
@@ -52,6 +42,29 @@ namespace ShopOnline.AdminApp.Services
             var body = await response.Content.ReadAsStringAsync();
             var users = JsonConvert.DeserializeObject<PagedResult<UserViewModel>>(body);
             return users;
+        }
+
+        public async Task<PagedResult<UserViewModel>> GetUsersPagings(GetUserPagingRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri("http://localhost:5000");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", request.BearerToken);
+            var response = await client.GetAsync($"/api/users/paging?pageIndex=" +
+                $"{request.PageIndex}&pageSize={request.PageSize}&keyword={request.KeyWord}");
+            var body = await response.Content.ReadAsStringAsync();
+            var users = JsonConvert.DeserializeObject<PagedResult<UserViewModel>>(body);
+            return users;
+        }
+        public async Task<bool> RegisterUser(RegisterRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri("http://localhost:5000");
+
+            var json = JsonConvert.SerializeObject(request);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync("/api/users/Register", httpContent);
+            return response.IsSuccessStatusCode;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace ShopOnline.ViewModels.System.Users
             RuleFor(x => x.Dob).GreaterThan(DateTime.Now.AddYears(-100)).WithMessage("Birthday cannot greater than 100 years");
             RuleFor(x => x.PhoneNumber).NotEmpty().WithMessage("Phone number is required");
 
-            RuleFor(x => x.UserName).NotEmpty().WithMessage("User name is required");
+           // RuleFor(x => x.UserName).NotEmpty().WithMessage("User name is required");
 
             RuleFor(x => x.PassWord).NotEmpty().WithMessage("Password is required")
                 .MinimumLength(6).WithMessage("Password is at least 6 characters");
