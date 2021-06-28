@@ -30,7 +30,7 @@ namespace ShopOnline.Application.System.Users
         }
         
       
-        public async Task<string> AuthenCate(LoginRequest request)
+        public async Task<ApiResult<string>> AuthenCate(LoginRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null) return null;
@@ -57,10 +57,34 @@ namespace ShopOnline.Application.System.Users
                 expires: DateTime.Now.AddHours(3),
                 signingCredentials: creds);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return new ApiSuccessResult<string>( new JwtSecurityTokenHandler().WriteToken(token));
         }
 
-        public async Task<PagedResult<UserViewModel>> GetUserPaging(GetUserPagingRequest request)
+        public async Task<ApiResult<UserViewModel>> GetById(Guid id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user == null)
+            {
+                return new ApiErrorResult<UserViewModel>("User không tồn tại");
+            }
+            var userVm = new UserViewModel()
+            {
+                Email = user.Email,
+                phoneNumber = user.PhoneNumber,
+                firstName = user.firstName,
+                Dob = user.Dob,
+                Id = user.Id,
+                lastName = user.lastName,
+                UserName = user.UserName
+                
+
+            };
+            return new ApiSuccessResult<UserViewModel>(userVm);
+        }
+
+      
+
+        public async Task<ApiResult<PagedResult<UserViewModel>>> GetUserPaging(GetUserPagingRequest request)
         {
             var query = _userManager.Users;
             if (!string.IsNullOrEmpty(request.KeyWord))
@@ -89,11 +113,20 @@ namespace ShopOnline.Application.System.Users
                 TotalRecord = totalRow,
                 Items = data
             };
-            return pagedResult;
+            return new ApiSuccessResult<PagedResult<UserViewModel>>(pagedResult);
         }
 
-        public async Task<bool> Register(RegisterRequest request)
+        public async Task<ApiResult<bool>> Register(RegisterRequest request)
         {
+
+            if (await _userManager.FindByNameAsync(request.UserName) != null)
+            {
+                return new ApiErrorResult<bool>("Tài khoản đã tồn tại");
+            }
+            if (await _userManager.FindByEmailAsync(request.Email) != null)
+            {
+                return new ApiErrorResult<bool>("Email đã tồn tại");
+            }
             var user11 = new AppUser()
             {
                 firstName = request.firstName,
@@ -106,9 +139,31 @@ namespace ShopOnline.Application.System.Users
             var result = await _userManager.CreateAsync(user11, request.PassWord);
             if(result.Succeeded)
             {
-                return true;
+                return new ApiSuccessResult<bool>();
             }
-            return false;
+            return new ApiErrorResult<bool>("Đăng kí không thành công");
         }
+
+        public async Task<ApiResult<bool>> Update(Guid id, UserUpdateRequest request)
+        {
+            if (await _userManager.Users.AnyAsync(x => x.Email == request.Email && x.Id != id))
+            {
+                return new ApiErrorResult<bool>("Emai đã tồn tại");
+            }
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            user.firstName = request.FirstName;
+            user.lastName = request.LastName;
+            user.Dob = request.Dob;
+            user.Email = request.Email;
+            user.PhoneNumber = request.PhoneNumber;
+            var result = await _userManager.UpdateAsync(user);
+            if(result.Succeeded)
+            {
+                return new ApiSuccessResult<bool>();
+            }
+            return new ApiErrorResult<bool>("Cập nhật không thành công");
+        }
+
+        
     }
 }
