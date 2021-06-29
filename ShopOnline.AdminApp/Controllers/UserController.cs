@@ -27,7 +27,7 @@ namespace ShopOnline.AdminApp.Controllers
        
 
 
-        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 10)
+        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 3)
         {
             var sessions = HttpContext.Session.GetString("Token");
 
@@ -42,6 +42,13 @@ namespace ShopOnline.AdminApp.Controllers
             return View(data.ResultObj);
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var user = await _userApiClient.GetById(id);
+            return View(user.ResultObj);
+        }
 
 
         [HttpPost]
