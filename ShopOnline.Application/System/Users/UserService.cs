@@ -28,17 +28,17 @@ namespace ShopOnline.Application.System.Users
             _roleManager = roleManager;
             _config = config;
         }
-        
-      
+
+
         public async Task<ApiResult<string>> AuthenCate(LoginRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
-            if (user == null) return null;
+            if (user == null) return new ApiErrorResult<string>("Tài khoản không tồn tại");
 
             var result = await _signInManager.PasswordSignInAsync(user, request.PassWord, request.RememberMe, true);
             if (!result.Succeeded)
             {
-                return null;
+                return new ApiErrorResult<string>("Tên đăng nhập, mật khẩu không đúng");
             }
             var roles = await _userManager.GetRolesAsync(user);
             var claims = new[]
@@ -57,8 +57,23 @@ namespace ShopOnline.Application.System.Users
                 expires: DateTime.Now.AddHours(3),
                 signingCredentials: creds);
 
-            return new ApiSuccessResult<string>( new JwtSecurityTokenHandler().WriteToken(token));
+            return new ApiSuccessResult<string>(new JwtSecurityTokenHandler().WriteToken(token));
         }
+
+        public async Task<ApiResult<bool>> Delete(Guid id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user == null)
+                return new ApiErrorResult<bool>("User không tồn tại");
+            var result = await _userManager.DeleteAsync(user);
+            if(result.Succeeded)
+            {
+                return new ApiSuccessResult<bool>();
+            }
+            return new ApiErrorResult<bool>("Xóa không thành công");
+        }
+
+     
 
         public async Task<ApiResult<UserViewModel>> GetById(Guid id)
         {
@@ -76,13 +91,13 @@ namespace ShopOnline.Application.System.Users
                 Id = user.Id,
                 lastName = user.lastName,
                 UserName = user.UserName
-                
+
 
             };
             return new ApiSuccessResult<UserViewModel>(userVm);
         }
 
-      
+
 
         public async Task<ApiResult<PagedResult<UserViewModel>>> GetUserPaging(GetUserPagingRequest request)
         {
@@ -133,13 +148,13 @@ namespace ShopOnline.Application.System.Users
             {
                 firstName = request.firstName,
                 lastName = request.lastName,
-                Dob =request.Dob,
+                Dob = request.Dob,
                 Email = request.Email,
                 PhoneNumber = request.PhoneNumber,
                 UserName = request.UserName
             };
             var result = await _userManager.CreateAsync(user11, request.PassWord);
-            if(result.Succeeded)
+            if (result.Succeeded)
             {
                 return new ApiSuccessResult<bool>();
             }
@@ -159,13 +174,13 @@ namespace ShopOnline.Application.System.Users
             user.Email = request.Email;
             user.PhoneNumber = request.PhoneNumber;
             var result = await _userManager.UpdateAsync(user);
-            if(result.Succeeded)
+            if (result.Succeeded)
             {
                 return new ApiSuccessResult<bool>();
             }
             return new ApiErrorResult<bool>("Cập nhật không thành công");
         }
 
-        
+
     }
 }

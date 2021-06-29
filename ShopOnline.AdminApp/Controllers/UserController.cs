@@ -19,12 +19,12 @@ namespace ShopOnline.AdminApp.Controllers
     {
         private readonly IUserApiClient _userApiClient;
         private readonly IConfiguration _configuration;
-        public UserController (IUserApiClient userApiClient, IConfiguration configuration)
+        public UserController(IUserApiClient userApiClient, IConfiguration configuration)
         {
             _userApiClient = userApiClient;
             _configuration = configuration;
         }
-       
+
 
 
         public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 3)
@@ -33,7 +33,7 @@ namespace ShopOnline.AdminApp.Controllers
 
             var request = new GetUserPagingRequest()
             {
-               
+
                 KeyWord = keyword,
                 PageIndex = pageIndex,
                 PageSize = pageSize
@@ -41,6 +41,28 @@ namespace ShopOnline.AdminApp.Controllers
             var data = await _userApiClient.GetUsersPaging(request);
             return View(data.ResultObj);
         }
+
+        [HttpGet]
+        public IActionResult Delete(Guid id)
+        {
+            return View(new UserDeleteRequest()
+            {
+                Id = id
+            });
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(UserDeleteRequest request)
+        {
+            if (!ModelState.IsValid) return View();
+            var result = await _userApiClient.Delete(request.Id);
+            if (result.IsSuccess)
+                return RedirectToAction("Index");
+            ModelState.AddModelError("", result.Message);
+            return View(request);
+        }
+
 
 
         [HttpGet]
@@ -84,7 +106,7 @@ namespace ShopOnline.AdminApp.Controllers
         public async Task<IActionResult> Edit(Guid id)
         {
             var result = await _userApiClient.GetById(id);
-            if(result.IsSuccess)
+            if (result.IsSuccess)
             {
                 var user = result.ResultObj;
                 var updateRequest = new UserUpdateRequest()
@@ -101,14 +123,14 @@ namespace ShopOnline.AdminApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit( UserUpdateRequest request)
+        public async Task<IActionResult> Edit(UserUpdateRequest request)
         {
             if (!ModelState.IsValid)
                 return View();
             var result = await _userApiClient.UpdateUser(request.Id, request);
             if (result.IsSuccess)
                 return RedirectToAction("Index");
-           // ModelState.AddModelError("", result.Message);
+            // ModelState.AddModelError("", result.Message);
             return View(request);
         }
     }
