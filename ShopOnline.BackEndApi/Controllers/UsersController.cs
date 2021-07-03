@@ -12,7 +12,7 @@ namespace ShopOnline.BackEndApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -69,7 +69,20 @@ namespace ShopOnline.BackEndApi.Controllers
             return Ok(result);
         }
 
-       
+        [HttpPut("{id}/roles")]
+        public async Task<IActionResult> RoleAssign(Guid id, [FromBody] RoleAssignRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var result = await _userService.RoleAssign(id, request); 
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+
 
 
         [HttpGet("{id}")]
