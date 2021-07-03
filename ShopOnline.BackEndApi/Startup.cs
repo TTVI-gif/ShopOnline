@@ -12,6 +12,7 @@ using Microsoft.OpenApi.Models;
 using ShopOnline.Application.Catalog;
 using ShopOnline.Application.Catalog.Products;
 using ShopOnline.Application.Common;
+using ShopOnline.Application.System.Roles;
 using ShopOnline.Application.System.Users;
 using ShopOnline.Data.EF;
 using ShopOnline.Data.Entities;
@@ -41,6 +42,7 @@ namespace ShopOnline.BackEndApi
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+            services.AddTransient<IRoleService, RoleService>();
             services.AddSwaggerGen();
             services.AddControllersWithViews().AddFluentValidation()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
@@ -62,7 +64,9 @@ namespace ShopOnline.BackEndApi
                     Scheme = "Bearer"
                 });
 
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+              
+
+                    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
                   {
                     {
                       new OpenApiSecurityScheme

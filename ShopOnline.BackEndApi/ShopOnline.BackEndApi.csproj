@@ -1,29 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="FluentValidation.AspNetCore" Version="10.2.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.2" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="FluentValidation.AspNetCore" Version="10.2.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.2" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.6.0" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
 	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ShopOnline.Application\ShopOnline.Application.csproj" />
-    <ProjectReference Include="..\ShopOnline.Data\ShopOnline.Data.csproj" />
-    <ProjectReference Include="..\ShopOnline.Utilities\ShopOnline.Utilities.csproj" />
-    <ProjectReference Include="..\ShopOnline.ViewModels\ShopOnline.ViewModels.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\ShopOnline.Application\ShopOnline.Application.csproj" />
+		<ProjectReference Include="..\ShopOnline.Data\ShopOnline.Data.csproj" />
+		<ProjectReference Include="..\ShopOnline.Utilities\ShopOnline.Utilities.csproj" />
+		<ProjectReference Include="..\ShopOnline.ViewModels\ShopOnline.ViewModels.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\user-content\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="wwwroot\user-content\" />
+	</ItemGroup>
 
 </Project>

@@ -34,12 +34,12 @@ namespace ShopOnline.AdminApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(LoginRequest request)
         {
-            if (!ModelState.IsValid)
-                return View(ModelState);
+            /*if (!ModelState.IsValid)
+                return View(ModelState);*/
             var result = await _userApiClient.Autheticate(request);
             if(result.ResultObj == null)
             {
-                ModelState.AddModelError("", result.Message);
+                ModelState.AddModelError(" ", result.Message);
                 return View();
             }    
             var userPrincipal = this.ValidateToken(result.ResultObj);
