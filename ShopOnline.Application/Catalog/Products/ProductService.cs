@@ -27,15 +27,16 @@ namespace ShopOnline.Application.Catalog.Products
 
         public async Task<int> AddImage(int productId, ProductImageCreateRequest request)
         {
-            var productImage = new ProductImage() {
+            var productImage = new ProductImage()
+            {
                 Caption = request.Caption,
                 DateCreated = DateTime.Now,
                 IsDefault = request.IsDefault,
                 SortOrder = request.SortOrder,
                 ProductId = productId
-                
+
             };
-       if(request.ImageFile!=null)
+            if (request.ImageFile != null)
             {
                 productImage.ImagePath = await this.SaveFile(request.ImageFile);
                 productImage.FileSize = request.ImageFile.Length;
@@ -99,23 +100,23 @@ namespace ShopOnline.Application.Catalog.Products
 
         public async Task<ProductImageViewModel> GetImageById(int imageId)
         {
-            
-                var image = await _context.ProductImages.FindAsync(imageId);
-                if (image == null)
-                    throw new EshopSolutonException($"Cannot find image with imageId{imageId}");
-                var model = new ProductImageViewModel()
-                {
-                    Caption = image.Caption,
-                    DateCreated = image.DateCreated,
-                    FileSize = image.FileSize,
-                    Id = image.Id,
-                    ImagePath = image.ImagePath,
-                    IsDefault = image.IsDefault,
-                    ProductId = image.ProductId,
-                    SortOrder = image.SortOrder
-                };
 
-                return model;   
+            var image = await _context.ProductImages.FindAsync(imageId);
+            if (image == null)
+                throw new EshopSolutonException($"Cannot find image with imageId{imageId}");
+            var model = new ProductImageViewModel()
+            {
+                Caption = image.Caption,
+                DateCreated = image.DateCreated,
+                FileSize = image.FileSize,
+                Id = image.Id,
+                ImagePath = image.ImagePath,
+                IsDefault = image.IsDefault,
+                ProductId = image.ProductId,
+                SortOrder = image.SortOrder
+            };
+
+            return model;
         }
 
         public async Task<int> Delete(int productId)
@@ -184,6 +185,7 @@ namespace ShopOnline.Application.Catalog.Products
                         join pt in _context.ProductTranslations on p.Id equals pt.ProductId
                         join pic in _context.ProductInCategories on p.Id equals pic.ProductId
                         join c in _context.Categories on pic.CategoryId equals c.Id
+                        where pt.LanguageId == request.LanguageId
                         select new { p, pt, pic, c };
 
             //2. filter
@@ -191,7 +193,7 @@ namespace ShopOnline.Application.Catalog.Products
             {
                 query = query.Where(x => x.pt.Name.Contains(request.KeyWord));
             }
-            if (request.CategoryIds.Count > 0)
+            if (request.CategoryIds != null && request.CategoryIds.Count > 0)
             {
                 query = query.Where(p => request.CategoryIds.Contains(p.pic.CategoryId));
 
@@ -221,8 +223,8 @@ namespace ShopOnline.Application.Catalog.Products
             var pageResult = new PagedResult<ProductViewModel>()
             {
                 TotalRecords = totalRow,
-                PageSize=request.PageSize,
-                PageIndex=request.PageIndex,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
                 Items = data
             };
             return pageResult;
@@ -235,12 +237,12 @@ namespace ShopOnline.Application.Catalog.Products
             var model = new ProductImageViewModel()
             {
                 Caption = image.Caption,
-                ProductId=image.ProductId,
-                ImagePath=image.ImagePath,
-                SortOrder=image.SortOrder,
-                DateCreated=image.DateCreated,
-                IsDefault=image.IsDefault,
-                FileSize=image.FileSize
+                ProductId = image.ProductId,
+                ImagePath = image.ImagePath,
+                SortOrder = image.SortOrder,
+                DateCreated = image.DateCreated,
+                IsDefault = image.IsDefault,
+                FileSize = image.FileSize
             };
             return model;
         }

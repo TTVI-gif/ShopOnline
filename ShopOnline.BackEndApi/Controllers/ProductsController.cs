@@ -10,18 +10,25 @@ namespace ShopOnline.BackEndApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class ProductController : ControllerBase
+    public class ProductsController : ControllerBase
     {
         private readonly ProductService _productService;
-        public ProductController(ProductService productService)
+        public ProductsController(ProductService productService)
         {
             _productService = productService;
         }
 
-        [HttpGet("{languageId}")]
+        /*[HttpGet("{languageId}")]
         public async Task<IActionResult> GetAllPaging(string languageId,[FromQuery] GetPublicProductPagingRequest request)
         {
             var product = await _productService.GetAllByCategoryId(languageId, request);
+            return Ok(product);
+        }*/
+
+        [HttpGet("paging")]
+        public async Task<IActionResult> GetAllPaging([FromQuery] GetProductPagingRequest request)
+        {
+            var product = await _productService.GetAllPaging(request);
             return Ok(product);
         }
 

@@ -3,15 +3,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Logging;
-using Microsoft.IdentityModel.Tokens;
 using ShopOnline.AdminApp.Services;
+using ShopOnline.Utilities.Constants;
 using ShopOnline.ViewModels.Common;
 using ShopOnline.ViewModels.System.Users;
 using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ShopOnline.AdminApp.Controllers
@@ -32,7 +28,7 @@ namespace ShopOnline.AdminApp.Controllers
 
         public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 10)
         {
-            var sessions = HttpContext.Session.GetString("Token");
+            var sessions = HttpContext.Session.GetString(SystemConstants.AppSettings.Token);
 
             var request = new GetUserPagingRequest()
             {
