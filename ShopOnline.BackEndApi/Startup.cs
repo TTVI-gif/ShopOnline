@@ -12,6 +12,7 @@ using Microsoft.OpenApi.Models;
 using ShopOnline.Application.Catalog;
 using ShopOnline.Application.Catalog.Products;
 using ShopOnline.Application.Common;
+using ShopOnline.Application.System.Language;
 using ShopOnline.Application.System.Roles;
 using ShopOnline.Application.System.Users;
 using ShopOnline.Data.EF;
@@ -39,6 +40,7 @@ namespace ShopOnline.BackEndApi
             services.AddTransient<ProductService, ProductService>();
             services.AddTransient<IStorageService, FileStorageService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ILanguageService, LanguageService>();
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();

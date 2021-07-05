@@ -31,7 +31,7 @@ namespace ShopOnline.AdminApp
             services.AddTransient<IUserApiClient, UserApiClient>();
             services.AddTransient<IRoleApiClient, RoleApiClient>();
             services.AddTransient<IValidator<RegisterRequest>, RegisterRequestValidator>();
-
+            services.AddTransient<ILanguageApiClient, LanguageApiClient>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(option =>
                 {
@@ -45,14 +45,14 @@ namespace ShopOnline.AdminApp
             });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-   /*         IMvcBuilder builder = services.AddRazorPages();
-            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-#if DEBUG
-            if (environment == Environments.Development)
-            {
-                builder.AddRazorRuntimeCompilation();
-            }
-#endif*/
+            /*         IMvcBuilder builder = services.AddRazorPages();
+                     var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+         #if DEBUG
+                     if (environment == Environments.Development)
+                     {
+                         builder.AddRazorRuntimeCompilation();
+                     }
+         #endif*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
