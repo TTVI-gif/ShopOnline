@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ShopOnline.Utilities\ShopOnline.Utilities.csproj" />
     <ProjectReference Include="..\ShopOnline.ViewModels\ShopOnline.ViewModels.csproj" />
   </ItemGroup>
 
