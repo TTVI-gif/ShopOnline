@@ -36,7 +36,7 @@ namespace ShopOnline.AdminApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult language(NavigationViewModel viewModel)
+        public IActionResult Language(NavigationViewModel viewModel)
         {
             HttpContext.Session.SetString(SystemConstants.AppSettings.DefaultLanguageId,
                 viewModel.CurrentLanguageId);
