@@ -20,9 +20,10 @@ namespace ShopOnline.Application.Catalog.Products
     {
         private readonly EshopDbContext _context;
         private readonly IStorageService _storageService;
-        public ProductService(EshopDbContext context)
+        public ProductService(EshopDbContext context, IStorageService storageService)
         {
             _context = context;
+            _storageService = storageService;
         }
 
         public async Task<int> AddImage(int productId, ProductImageCreateRequest request)
@@ -78,7 +79,7 @@ namespace ShopOnline.Application.Catalog.Products
                 }
 
             };
-            if (request.ThumbaiImage != null)
+            if (request.ThumbnaiImage != null)
             {
                 product.ProductImages = new List<ProductImage>()
                 {
@@ -86,16 +87,16 @@ namespace ShopOnline.Application.Catalog.Products
                     {
                         Caption = "Thumbai Image",
                         DateCreated = DateTime.Now,
-                        FileSize = request.ThumbaiImage.Length,
-                        ImagePath = await this.SaveFile(request.ThumbaiImage),
+                        FileSize = request.ThumbnaiImage.Length,
+                        ImagePath = await this.SaveFile(request.ThumbnaiImage),
                         IsDefault = true,
                         SortOrder = 1
                     }
-
                 };
             }
             _context.Products.Add(product);
-            return await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+            return product.Id;
         }
 
         public async Task<ProductImageViewModel> GetImageById(int imageId)
@@ -183,21 +184,21 @@ namespace ShopOnline.Application.Catalog.Products
             //select
             var query = from p in _context.Products
                         join pt in _context.ProductTranslations on p.Id equals pt.ProductId
-                        join pic in _context.ProductInCategories on p.Id equals pic.ProductId
-                        join c in _context.Categories on pic.CategoryId equals c.Id
+                        // join pic in _context.ProductInCategories on p.Id equals pic.ProductId
+                        // join c in _context.Categories on pic.CategoryId equals c.Id
                         where pt.LanguageId == request.LanguageId
-                        select new { p, pt, pic, c };
+                        select new { p, pt };
 
             //2. filter
             if (!String.IsNullOrEmpty(request.KeyWord))
             {
                 query = query.Where(x => x.pt.Name.Contains(request.KeyWord));
             }
-            if (request.CategoryIds != null && request.CategoryIds.Count > 0)
-            {
-                query = query.Where(p => request.CategoryIds.Contains(p.pic.CategoryId));
+            /* if (request.CategoryIds != null && request.CategoryIds.Count > 0)
+             {
+                 query = query.Where(p => request.CategoryIds.Contains(p.pic.CategoryId));
 
-            }
+             }*/
             //3. paging
             int totalRow = await query.CountAsync();
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
@@ -325,13 +326,6 @@ namespace ShopOnline.Application.Catalog.Products
             return await _context.SaveChangesAsync() > 0;
         }
 
-        private async Task<string> SaveFile(IFormFile file)
-        {
-            var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
-            await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
-            return fileName;
-        }
 
         public async Task<ProductViewModel> GetbyId(int productId, string languageId)
         {
@@ -355,6 +349,13 @@ namespace ShopOnline.Application.Catalog.Products
                 ViewCount = product.ViewCount,
             };
             return productViewModel;
+        }
+        private async Task<string> SaveFile(IFormFile file)
+        {
+            var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
+            await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
+            return fileName;
         }
     }
 }

@@ -17,6 +17,6 @@ namespace ShopOnline.ViewModels.Catalog.Products
         public string SeoTitle { set; get; }
         public string SeoAlias { get; set; }
         public string LanguageId { set; get; }
-        public IFormFile ThumbaiImage { get; set; }
+        public IFormFile ThumbnaiImage { get; set; }
     }
 }
