@@ -7,6 +7,6 @@ namespace ShopOnline.AdminApp.Services
     public interface IProductApiClient
     {
         Task<PagedResult<ProductViewModel>> GetAll(GetProductPagingRequest request);
-        //Task<ApiResult<bool>> Create(ProductCreateRequest request);
+        Task<bool> Create(ProductCreateRequest request);
     }
 }

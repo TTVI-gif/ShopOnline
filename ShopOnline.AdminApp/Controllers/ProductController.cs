@@ -37,7 +37,7 @@ namespace ShopOnline.AdminApp.Controllers
             }
             return View(data);
         }
-/*
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -47,20 +47,21 @@ namespace ShopOnline.AdminApp.Controllers
 
 
         [HttpPost]
+        [Consumes("multipart/form-data")]
         public async Task<IActionResult> Create(ProductCreateRequest request)
         {
             if (!ModelState.IsValid)
-                return View();
+                return View(request);
 
-            var result = await _productApiClient.(request);
-            if (result.IsSuccess)
+            var result = await _productApiClient.Create(request);
+            if (result)
             {
                 TempData["result"] = "Thêm người dùng thành công";
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", result.Message);
+            ModelState.AddModelError("", "Thêm sản phẩm không thành công");
             return View(request);
-        }*/
+        }
     }
 }

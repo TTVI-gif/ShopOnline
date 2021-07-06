@@ -34,7 +34,7 @@ namespace ShopOnline.BackEndApi.Controllers
 
         [HttpGet("{productId}/{languageId}")]
         public async Task<IActionResult> GetById(int productId, string languageId)
-            {
+        {
             var product = await _productService.GetbyId(productId, languageId);
             if (product == null)
                 return BadRequest("Cannot find product");
@@ -42,6 +42,7 @@ namespace ShopOnline.BackEndApi.Controllers
         }
 
         [HttpPost]
+        [Consumes("multipart/form-data")]
         public async Task<IActionResult> Create([FromForm] ProductCreateRequest request)
         {
             if (!ModelState.IsValid)
@@ -94,7 +95,7 @@ namespace ShopOnline.BackEndApi.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var result = await _productService.AddImage(productId, request);
-            if(result == 0)
+            if (result == 0)
             {
                 return BadRequest();
             }

@@ -21,6 +21,6 @@ namespace ShopOnline.Data.Entities
         public List<Cart> Carts { get; set; }
 
         public List<ProductTranslation> ProductTranslations { get; set; }
-        public IList<ProductImage> ProductImages { get; set; }
+        public List<ProductImage> ProductImages { get; set; }
     }
 }
