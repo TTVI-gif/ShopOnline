@@ -31,8 +31,13 @@
                 <div class="col-md-6 col-xs-12">
                     <form asp-action="Index" method="get">
                         <div class="row">
-                            <div class="col-md-9">
+                            <div class="col-md-5">
                                 <input class="form-control" value="@ViewBag.keyword" type="text" placeholder="Search for..." aria-label="Search" name="keyword" />
+                            </div><div class="col-md-4">
+                                <select class="form-control" onchange="this.form.submit()" asp-items="@ViewBag.Categories" name="CategoryId">
+                                    <option>--Chọn danh mục--</option>
+                                </select>
+
                             </div>
                             <div class="col-md-3">
                                 <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>

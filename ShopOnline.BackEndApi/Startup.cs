@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ShopOnline.Application.Catalog;
+using ShopOnline.Application.Catalog.Category;
 using ShopOnline.Application.Catalog.Products;
 using ShopOnline.Application.Common;
 using ShopOnline.Application.System.Language;
@@ -45,6 +46,7 @@ namespace ShopOnline.BackEndApi
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<ICategoryService, CategoryService>();
             services.AddSwaggerGen();
             services.AddControllersWithViews().AddFluentValidation()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());

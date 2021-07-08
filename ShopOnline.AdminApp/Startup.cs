@@ -32,6 +32,7 @@ namespace ShopOnline.AdminApp
             services.AddTransient<IRoleApiClient, RoleApiClient>();
             services.AddTransient<ILanguageApiClient, LanguageApiClient>();
             services.AddTransient<IProductApiClient, ProductApiClient>();
+            services.AddTransient<ICategoryApiClient, CategoryApiClient>();
             services.AddTransient<IValidator<RegisterRequest>, RegisterRequestValidator>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
