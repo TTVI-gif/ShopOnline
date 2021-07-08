@@ -78,6 +78,10 @@ namespace ShopOnline.AdminApp.Services
             return data;
         }
 
-
+        public async Task<ProductViewModel> GetById(int id, string languageId)
+        {
+            var product = await GetAsync<ProductViewModel>($"/api/products/{id}/{languageId}");
+            return product;
+        }
     }
 }

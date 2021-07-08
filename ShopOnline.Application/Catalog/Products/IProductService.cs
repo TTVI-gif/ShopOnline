@@ -1,4 +1,5 @@
-﻿using ShopOnline.ViewModels.Catalog.ProductImages;
+﻿using ShopOnline.ViewModels.Catalog.Categories;
+using ShopOnline.ViewModels.Catalog.ProductImages;
 using ShopOnline.ViewModels.Catalog.Products;
 using ShopOnline.ViewModels.Common;
 using System.Collections.Generic;
@@ -35,5 +36,7 @@ namespace ShopOnline.Application.Catalog
         Task<ProductImageViewModel> getImageById(int imageId);
 
         Task<List<ProductImageViewModel>> GetListImage(int productId);
+
+        Task<ApiResult<bool>> CategoryAssign(int id, CategoryAssignRequest request);
     }
 }
