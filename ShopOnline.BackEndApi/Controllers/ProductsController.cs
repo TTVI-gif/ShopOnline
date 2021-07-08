@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShopOnline.Application.Catalog.Products;
+using ShopOnline.ViewModels.Catalog.Categories;
 using ShopOnline.ViewModels.Catalog.ProductImages;
 using ShopOnline.ViewModels.Catalog.Products;
 using System.Threading.Tasks;
@@ -119,6 +120,21 @@ namespace ShopOnline.BackEndApi.Controllers
             if (result == 0)
                 return BadRequest();
             return Ok();
+        }
+
+        [HttpPut("{id}/categories")]
+        public async Task<IActionResult> CategoryAssign(int id, [FromBody] CategoryAssignRequest request)
+        {
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var result = await _productService.CategoryAssign(id, request);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+
         }
     }
 }

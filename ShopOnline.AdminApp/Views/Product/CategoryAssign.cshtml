@@ -1,30 +1,30 @@
-﻿@model ShopOnline.ViewModels.System.Users.RoleAssignRequest
+﻿@model ShopOnline.ViewModels.Catalog.Categories.CategoryAssignRequest
 
 @{
-    ViewData["Title"] = "RoleAssign";
+    ViewData["Title"] = "CategoryAssign";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Phân quyền người dùng</h1>
+<h1>Gán danh mục sản phẩm</h1>
 <div class="container-fluid">
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
-        <li class="breadcrumb-item active">Phân quyền người dùng</li>
+        <li class="breadcrumb-item active">Gán danh mục sản phẩm</li>
     </ol>
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="RoleAssign">
+            <form asp-action="CategoryAssign">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
-                @for (var i = 0; i < Model.Roles.Count; i++)
+                @for (var i = 0; i < Model.Categories.Count; i++)
                 {
                     <div class="form-group">
                         <label>
-                            @Model.Roles[i].Name
+                            @Model.Categories[i].Name
 
-                            <input asp-for="Roles[i].Selected" type="checkbox" />
-                            <input asp-for="Roles[i].Id" type="hidden" />
-                            <input asp-for="Roles[i].Name" type="hidden" />
+                            <input asp-for="Categories[i].Selected" type="checkbox" />
+                            <input asp-for="Categories[i].Id" type="hidden" />
+                            <input asp-for="Categories[i].Name" type="hidden" />
 
                         </label>
                     </div>
