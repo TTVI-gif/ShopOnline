@@ -10,8 +10,8 @@ using ShopOnline.Data.EF;
 namespace ShopOnline.Data.Migrations
 {
     [DbContext(typeof(EshopDbContext))]
-    [Migration("20210615154301_changeFileLenghtType")]
-    partial class changeFileLenghtType
+    [Migration("20210710152800_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -182,7 +182,7 @@ namespace ShopOnline.Data.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "21800f14-3dda-4b50-bd41-e4322bfca385",
+                            ConcurrencyStamp = "ddd8607e-dc32-4361-8db2-20b8f263d218",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -259,14 +259,14 @@ namespace ShopOnline.Data.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ca6e7f28-5bc9-4e15-aed4-e1ef1a0d01cf",
+                            ConcurrencyStamp = "7bdccd4e-f534-46cf-874e-6ae42d4c6789",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "tedu.international@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "tedu.international@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKdndsDdf9xgr4cILUkng5oQS2QUAw+m8VlvpkWt5CKXShIrXNxF2qdSkdQlFtlwKQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ0bN+w6u+tJF9Ekt9YYiXW3+1FaTv+RcSFR79R8Xn5TSqjbcUvyiw0wR2ocrAFjMw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -402,7 +402,7 @@ namespace ShopOnline.Data.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            LanguageId = "vi-VN",
+                            LanguageId = "vi",
                             Name = "Áo nam",
                             SeoAlias = "ao-nam",
                             SeoDescription = "Sản phẩm áo thời trang nam",
@@ -412,7 +412,7 @@ namespace ShopOnline.Data.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            LanguageId = "en-US",
+                            LanguageId = "en",
                             Name = "Men Shirt",
                             SeoAlias = "men-shirt",
                             SeoDescription = "The shirt products for men",
@@ -422,7 +422,7 @@ namespace ShopOnline.Data.Migrations
                         {
                             Id = 3,
                             CategoryId = 2,
-                            LanguageId = "vi-VN",
+                            LanguageId = "vi",
                             Name = "Áo nữ",
                             SeoAlias = "ao-nu",
                             SeoDescription = "Sản phẩm áo thời trang nữ",
@@ -432,7 +432,7 @@ namespace ShopOnline.Data.Migrations
                         {
                             Id = 4,
                             CategoryId = 2,
-                            LanguageId = "en-US",
+                            LanguageId = "en",
                             Name = "Women Shirt",
                             SeoAlias = "women-shirt",
                             SeoDescription = "The shirt products for women",
@@ -498,13 +498,13 @@ namespace ShopOnline.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "vi-VN",
+                            Id = "vi",
                             IsDefault = true,
                             Name = "Tiếng Việt"
                         },
                         new
                         {
-                            Id = "en-US",
+                            Id = "en",
                             IsDefault = false,
                             Name = "English"
                         });
@@ -615,7 +615,7 @@ namespace ShopOnline.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2021, 6, 15, 22, 43, 0, 958, DateTimeKind.Local).AddTicks(7501),
+                            DateCreated = new DateTime(2021, 7, 10, 22, 27, 59, 998, DateTimeKind.Local).AddTicks(4564),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,
@@ -740,7 +740,7 @@ namespace ShopOnline.Data.Migrations
                             Id = 1,
                             Description = "Áo sơ mi nam trắng Việt Tiến",
                             Details = "Áo sơ mi nam trắng Việt Tiến",
-                            LanguageId = "vi-VN",
+                            LanguageId = "vi",
                             Name = "Áo sơ mi nam trắng Việt Tiến",
                             ProductId = 1,
                             SeoAlias = "ao-so-mi-nam-trang-viet-tien",
@@ -752,7 +752,7 @@ namespace ShopOnline.Data.Migrations
                             Id = 2,
                             Description = "Viet Tien Men T-Shirt",
                             Details = "Viet Tien Men T-Shirt",
-                            LanguageId = "en-US",
+                            LanguageId = "en",
                             Name = "Viet Tien Men T-Shirt",
                             ProductId = 1,
                             SeoAlias = "viet-tien-men-t-shirt",
