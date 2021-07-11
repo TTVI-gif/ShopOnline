@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+	  <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShopOnline.Data\ShopOnline.Data.csproj" />
+    <ProjectReference Include="..\ShopOnline.Utilities\ShopOnline.Utilities.csproj" />
+    <ProjectReference Include="..\ShopOnline.ViewModels\ShopOnline.ViewModels.csproj" />
+  </ItemGroup>
+
 </Project>
