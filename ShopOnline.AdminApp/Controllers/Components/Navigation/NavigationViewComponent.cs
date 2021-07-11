@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShopOnline.AdminApp.Models;
-using ShopOnline.AdminApp.Services;
+using ShopOnline.ApiIntegration;
 using ShopOnline.Utilities.Constants;
 using System.Threading.Tasks;
 

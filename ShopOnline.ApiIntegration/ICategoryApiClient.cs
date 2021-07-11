@@ -3,7 +3,7 @@ using ShopOnline.ViewModels.Common;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ShopOnline.AdminApp.Services
+namespace ShopOnline.ApiIntegration
 {
     public interface ICategoryApiClient
     {
