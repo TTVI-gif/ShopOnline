@@ -9,7 +9,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopOnline.AdminApp.Services
+namespace ShopOnline.ApiIntegration
 {
     public class UserApiClient : IUserApiClient
     {
@@ -68,7 +68,7 @@ namespace ShopOnline.AdminApp.Services
         public async Task<ApiResult<PagedResult<UserViewModel>>> GetUsersPaging(GetUserPagingRequest request)
         {
             var client = _httpClientFactory.CreateClient();
-            var sessions =  _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
             client.BaseAddress = new Uri("http://localhost:5000");
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
             var response = await client.GetAsync($"/api/users/paging?pageIndex=" +

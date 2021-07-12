@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
-using ShopOnline.AdminApp.Services;
+using ShopOnline.ApiIntegration;
 using ShopOnline.Utilities.Constants;
 using ShopOnline.ViewModels.Catalog.Categories;
 using ShopOnline.ViewModels.Catalog.Products;

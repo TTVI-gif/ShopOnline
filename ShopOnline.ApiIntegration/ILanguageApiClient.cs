@@ -3,7 +3,7 @@ using ShopOnline.ViewModels.System.Language;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ShopOnline.AdminApp.Services
+namespace ShopOnline.ApiIntegration
 {
     public interface ILanguageApiClient
     {
