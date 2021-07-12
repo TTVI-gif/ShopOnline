@@ -3,7 +3,7 @@ using ShopOnline.ViewModels.System.Users;
 using System;
 using System.Threading.Tasks;
 
-namespace ShopOnline.AdminApp.Services
+namespace ShopOnline.ApiIntegration
 {
     public interface IUserApiClient
     {

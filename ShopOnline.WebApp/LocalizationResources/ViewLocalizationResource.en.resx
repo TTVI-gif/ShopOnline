@@ -137,4 +137,8 @@
     <value>Specials Offer</value>
     <comment>layout</comment>
   </data>
+  <data name="VIEW" xml:space="preserve">
+    <value>VIEW</value>
+    <comment>layout</comment>
+  </data>
 </root>

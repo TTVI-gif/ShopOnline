@@ -1,11 +1,14 @@
 using LazZiya.ExpressLocalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ShopOnline.ApiIntegration;
 using ShopOnline.WebApp.LocalizationResources;
+using System;
 using System.Globalization;
 
 namespace ShopOnline.WebApp
@@ -23,11 +26,23 @@ namespace ShopOnline.WebApp
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddHttpClient();
+
+            services.AddTransient<ISlideApiClient, SlideApiClient>();
+
+            services.AddTransient<IProductApiClient, ProductApiClient>();
+
             var cultures = new[]
                 {
                      new CultureInfo("vi"),
                     new CultureInfo("en"),
                 };
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddControllersWithViews()
                 .AddExpressLocalization<ExpressLocalizationResource, ViewLocalizationResource>(ops =>
@@ -81,6 +96,8 @@ namespace ShopOnline.WebApp
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseRequestLocalization();
 

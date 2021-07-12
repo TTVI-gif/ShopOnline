@@ -5,13 +5,14 @@ using ShopOnline.Utilities.Constants;
 using ShopOnline.ViewModels.Catalog.Products;
 using ShopOnline.ViewModels.Common;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopOnline.AdminApp.Services
+namespace ShopOnline.ApiIntegration
 {
     public class ProductApiClient : BaseApiClient, IProductApiClient
     {
@@ -82,6 +83,12 @@ namespace ShopOnline.AdminApp.Services
         {
             var product = await GetAsync<ProductViewModel>($"/api/products/{id}/{languageId}");
             return product;
+        }
+
+        public async Task<List<ProductViewModel>> GetFeatureProduct(string languageId, int take)
+        {
+            var data = await GetListAsync<ProductViewModel>($"/api/products/feature/{languageId}/{take}");
+            return data;
         }
     }
 }

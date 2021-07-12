@@ -38,5 +38,7 @@ namespace ShopOnline.Application.Catalog
         Task<List<ProductImageViewModel>> GetListImage(int productId);
 
         Task<ApiResult<bool>> CategoryAssign(int id, CategoryAssignRequest request);
+
+        Task<List<ProductViewModel>> GetFeatureProduct(string languageId, int take);
     }
 }

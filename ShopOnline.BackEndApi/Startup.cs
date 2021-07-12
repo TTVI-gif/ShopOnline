@@ -16,6 +16,7 @@ using ShopOnline.Application.Common;
 using ShopOnline.Application.System.Language;
 using ShopOnline.Application.System.Roles;
 using ShopOnline.Application.System.Users;
+using ShopOnline.Application.Utilities.Slides;
 using ShopOnline.Data.EF;
 using ShopOnline.Data.Entities;
 using ShopOnline.ViewModels.System.Users;
@@ -37,19 +38,34 @@ namespace ShopOnline.BackEndApi
         {
             services.AddDbContext<EshopDbContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("eShopSolution")));
+
             services.AddTransient<IProductService, ProductService>();
+
             services.AddTransient<ProductService, ProductService>();
+
             services.AddTransient<IStorageService, FileStorageService>();
+
             services.AddTransient<IUserService, UserService>();
+
             services.AddTransient<ILanguageService, LanguageService>();
+
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
+
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
+
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+
             services.AddTransient<IRoleService, RoleService>();
+
             services.AddTransient<ICategoryService, CategoryService>();
+
+            services.AddTransient<ISlideService, SlideService>();
+
             services.AddSwaggerGen();
+
             services.AddControllersWithViews().AddFluentValidation()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
+            
             services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<EshopDbContext>()
                 .AddDefaultTokenProviders();

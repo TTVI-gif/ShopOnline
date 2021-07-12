@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
-using ShopOnline.AdminApp.Services;
+using ShopOnline.ApiIntegration;
 using ShopOnline.Utilities.Constants;
 using ShopOnline.ViewModels.System.Users;
 using System;

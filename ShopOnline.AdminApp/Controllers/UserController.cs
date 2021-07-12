@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using ShopOnline.AdminApp.Services;
+using ShopOnline.ApiIntegration;
 using ShopOnline.Utilities.Constants;
 using ShopOnline.ViewModels.Common;
 using ShopOnline.ViewModels.System.Users;

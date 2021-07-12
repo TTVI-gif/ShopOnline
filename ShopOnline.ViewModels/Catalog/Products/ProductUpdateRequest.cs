@@ -14,6 +14,7 @@ namespace ShopOnline.ViewModels.Catalog.Products
         public string SeoDescription { set; get; }
         public string SeoTitle { set; get; }
         public string SeoAlias { get; set; }
+        public bool? Isfeatured { get; set; }
         public string LanguageId { set; get; }
         public IFormFile ThumbaiImage { get; set; }
     }
