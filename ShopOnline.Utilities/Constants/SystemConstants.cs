@@ -10,5 +10,10 @@
             public const string Token = "Token";
             public const string BaseAddress = "BaseAddress";
         }
+
+        public class FeatureProducts
+        {
+            public const int  NumberFeatureProduct = 4;
+        }
     }
 }

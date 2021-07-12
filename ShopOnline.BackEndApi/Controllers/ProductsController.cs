@@ -10,7 +10,7 @@ namespace ShopOnline.BackEndApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    
     public class ProductsController : ControllerBase
     {
         private readonly ProductService _productService;
@@ -135,6 +135,14 @@ namespace ShopOnline.BackEndApi.Controllers
             }
             return Ok(result);
 
+        }
+
+        [HttpGet("feature/{languageId}/{take}")]
+        [AllowAnonymous]
+        public async Task<IActionResult>GetFeatureProduct(string languageId, int take)
+        {
+            var featureProduct = await _productService.GetFeatureProduct(languageId, take);
+            return Ok(featureProduct);
         }
     }
 }

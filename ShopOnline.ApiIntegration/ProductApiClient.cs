@@ -5,6 +5,7 @@ using ShopOnline.Utilities.Constants;
 using ShopOnline.ViewModels.Catalog.Products;
 using ShopOnline.ViewModels.Common;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -82,6 +83,12 @@ namespace ShopOnline.ApiIntegration
         {
             var product = await GetAsync<ProductViewModel>($"/api/products/{id}/{languageId}");
             return product;
+        }
+
+        public async Task<List<ProductViewModel>> GetFeatureProduct(string languageId, int take)
+        {
+            var data = await GetListAsync<ProductViewModel>($"/api/products/feature/{languageId}/{take}");
+            return data;
         }
     }
 }
