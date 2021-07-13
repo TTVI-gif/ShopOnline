@@ -294,9 +294,9 @@ namespace ShopOnline.Application.Catalog.Products
 
         public async Task<int> Update(ProductUpdateRequest request)
         {
-            var product = await _context.Products.FindAsync(request.ID);
-            var productTranslations = await _context.ProductTranslations.FirstOrDefaultAsync(x => x.ProductId == request.ID && x.LanguageId == request.LanguageId);
-            if (product == null || productTranslations == null) throw new EshopSolutonException($"Can not find a product with id {request.ID}");
+            var product = await _context.Products.FindAsync(request.Id);
+            var productTranslations = await _context.ProductTranslations.FirstOrDefaultAsync(x => x.ProductId == request.Id && x.LanguageId == request.LanguageId);
+            if (product == null || productTranslations == null) throw new EshopSolutonException($"Can not find a product with id {request.Id}");
             productTranslations.Name = request.Name;
             productTranslations.SeoAlias = request.SeoAlias;
             productTranslations.SeoDescription = request.SeoDescription;
@@ -306,7 +306,7 @@ namespace ShopOnline.Application.Catalog.Products
             //update image
             if (request.ThumbaiImage != null)
             {
-                var thumbnaiimage = await _context.ProductImages.FirstOrDefaultAsync(i => i.IsDefault == true && i.ProductId == request.ID);
+                var thumbnaiimage = await _context.ProductImages.FirstOrDefaultAsync(i => i.IsDefault == true && i.ProductId == request.Id);
                 if (thumbnaiimage != null)
                 {
                     thumbnaiimage.FileSize = request.ThumbaiImage.Length;

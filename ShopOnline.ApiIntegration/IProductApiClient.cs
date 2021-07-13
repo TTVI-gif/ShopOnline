@@ -11,6 +11,7 @@ namespace ShopOnline.ApiIntegration
         Task<bool> Create(ProductCreateRequest request);
         Task<ProductViewModel> GetById(int id, string languageId);
         Task<List<ProductViewModel>> GetFeatureProduct(string languageId, int take);
+        Task<bool> UpdateProduct(ProductUpdateRequest request);
 
     }
 }
