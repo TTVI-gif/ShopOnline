@@ -1,7 +1,7 @@
-﻿@model ShopOnline.ViewModels.Catalog.Products.ProductCreateRequest
+﻿@model ShopOnline.ViewModels.Catalog.Products.ProductUpdateRequest
 
 @{
-    ViewData["Title"] = "Thêm mới sản phẩm";
+    ViewData["Title"] = "Cập nhật sản phẩm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -23,35 +23,20 @@
     </script>
 }
 
-<h1>Thêm mới sản phẩm</h1>
 <div class="container-fluid">
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
-        <li class="breadcrumb-item active">Thêm mới sản phẩm</li>
+        <li class="breadcrumb-item active">Cập nhật sản phẩm</li>
     </ol>
     <div class="row">
         <div class="col-md-8">
-            <form asp-action="Create" enctype="multipart/form-data" method="post">
+            <form asp-action="Edit" enctype="multipart/form-data" method="post">
                 <div asp-validation-summary="All" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
                 <div class="form-group">
                     <label asp-for="Name" class="control-label"></label>
                     <input asp-for="Name" class="form-control" />
                     <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Price" class="control-label"></label>
-                    <input asp-for="Price" class="form-control" />
-                    <span asp-validation-for="Price" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="OriginalPrice" class="control-label"></label>
-                    <input asp-for="OriginalPrice" class="form-control" />
-                    <span asp-validation-for="OriginalPrice" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Stock" class="control-label"></label>
-                    <input asp-for="Stock" class="form-control" />
-                    <span asp-validation-for="Stock" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Description" class="control-label"></label>
@@ -79,13 +64,13 @@
                     <span asp-validation-for="SeoAlias" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ThumbnaiImage" class="control-label"></label>
-                    <input asp-for="ThumbnaiImage" type="file" class="form-control" />
-                    <span asp-validation-for="ThumbnaiImage" class="text-danger"></span>
+                    <label asp-for="ThumbaiImage" class="control-label"></label>
+                    <input asp-for="ThumbaiImage" type="file" class="form-control" />
+                    <span asp-validation-for="ThumbaiImage" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" value="Create" class="btn btn-primary">Tạo mới</button>
+                    <button type="submit" value="Update" class="btn btn-primary">Cập nhật</button>
                 </div>
             </form>
         </div>

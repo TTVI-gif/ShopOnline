@@ -10,7 +10,7 @@ namespace ShopOnline.BackEndApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly ProductService _productService;
@@ -44,7 +44,7 @@ namespace ShopOnline.BackEndApi.Controllers
 
         [HttpPost]
         [Consumes("multipart/form-data")]
-        public async Task<IActionResult> Create([FromForm] ProductCreateRequest request)
+        public async Task<IActionResult> Create([FromForm]ProductCreateRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -55,9 +55,15 @@ namespace ShopOnline.BackEndApi.Controllers
             return CreatedAtAction(nameof(GetById), new { id = result }, product);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update([FromForm] ProductUpdateRequest request)
+        [HttpPut("{productId}")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> Update([FromRoute]int productId,[FromForm] ProductUpdateRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            request.Id = productId;
             var result = await _productService.Update(request);
             if (result == 0)
                 return BadRequest();

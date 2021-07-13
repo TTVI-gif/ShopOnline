@@ -15,5 +15,10 @@
         {
             public const int  NumberFeatureProduct = 4;
         }
+
+        public class product
+        {
+            public const string NA = "N/A";
+        }
     }
 }

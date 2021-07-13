@@ -7,7 +7,7 @@ namespace ShopOnline.ViewModels.Catalog.Products
 {
     public class ProductUpdateRequest
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { set; get; }
         public string Description { set; get; }
         public string Details { set; get; }
