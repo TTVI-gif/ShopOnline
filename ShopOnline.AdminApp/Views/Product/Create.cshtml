@@ -11,7 +11,7 @@
 
     <script>
         ClassicEditor
-            .create(document.querySelector('#txt_detail'), {
+            .create(document.querySelector('#txt_details'), {
                 // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
             })
             .then(editor => {
@@ -60,7 +60,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Details" class="control-label"></label>
-                    <input asp-for="Details" id="txt_detail" class="form-control" />
+                    <textarea asp-for="Details" id="txt_details" class="form-control"></textarea>
                     <span asp-validation-for="Details" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -94,4 +94,5 @@
     <div>
         <a asp-action="Index">Back to List</a>
     </div>
+</div>
 

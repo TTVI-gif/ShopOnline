@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ShopOnline.Application.Common;
 using ShopOnline.Data.EF;
 using ShopOnline.Data.Entities;
+using ShopOnline.Utilities.Constants;
 using ShopOnline.Utilities.Exceptions;
 using ShopOnline.ViewModels.Catalog.Categories;
 using ShopOnline.ViewModels.Catalog.ProductImages;
@@ -56,6 +57,34 @@ namespace ShopOnline.Application.Catalog.Products
 
         public async Task<int> Create(ProductCreateRequest request)
         {
+            var languages = _context.Languages;
+            var transactions = new List<ProductTranslation>();
+            foreach (var language in languages)
+            {
+                if (language.Id == request.LanguageId)
+                {
+                    transactions.Add(new ProductTranslation()
+                        {
+                        Name = request.Name,
+                        Description = request.Description,
+                        Details = request.Details,
+                        SeoAlias = request.SeoAlias,
+                        SeoDescription = request.SeoDescription,
+                        SeoTitle = request.SeoTitle,
+                        LanguageId = request.LanguageId
+                    });
+                }
+                else
+                {
+                    transactions.Add(new ProductTranslation()
+                    {
+                        Name = SystemConstants.product.NA,
+                        Description = SystemConstants.product.NA,
+                        SeoAlias = SystemConstants.product.NA,
+                        LanguageId = language.Id
+                    }); 
+                }
+            }
             var product = new Product()
             {
 
@@ -65,20 +94,7 @@ namespace ShopOnline.Application.Catalog.Products
                 SeoAlias = request.SeoAlias,
                 DateCreated = DateTime.Now,
                 ViewCount = 0,
-                ProductTranslations = new List<ProductTranslation>()
-                {
-                    new ProductTranslation()
-                    {
-                        Name = request.Name,
-                        Description = request.Description,
-                        Details=request.Details,
-                        SeoAlias=request.SeoAlias,
-                        SeoDescription=request.SeoDescription,
-                        SeoTitle=request.SeoTitle,
-                        LanguageId=request.LanguageId
-                    }
-                }
-
+                ProductTranslations = transactions
             };
             if (request.ThumbnaiImage != null)
             {
@@ -221,7 +237,7 @@ namespace ShopOnline.Application.Catalog.Products
                     SeoTitle = x.pt.SeoTitle,
                     Stock = x.p.Stock,
                     ViewCount = x.p.ViewCount,
-                    
+
                 }).ToListAsync();
 
             //4. Select and Projecttion
@@ -411,7 +427,7 @@ namespace ShopOnline.Application.Catalog.Products
                         && p.Isfeatured == true
                         select new { p, pt, pic, pi };
 
-            var data = await query.OrderByDescending(x=>x.p.DateCreated).Take(take)
+            var data = await query.OrderByDescending(x => x.p.DateCreated).Take(take)
                 .Select(x => new ProductViewModel()
                 {
                     Id = x.p.Id,
