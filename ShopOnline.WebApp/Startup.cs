@@ -32,6 +32,8 @@ namespace ShopOnline.WebApp
 
             services.AddTransient<IProductApiClient, ProductApiClient>();
 
+            services.AddTransient<ICategoryApiClient, CategoryApiClient>();
+
             var cultures = new[]
                 {
                      new CultureInfo("vi"),
@@ -74,7 +76,7 @@ namespace ShopOnline.WebApp
                         o.DefaultRequestCulture = new RequestCulture("vi");
                     };
                 });
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -103,6 +105,38 @@ namespace ShopOnline.WebApp
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "Product category en",
+                    pattern: "{culture}/categories/{id}", new
+                    {
+                        controller = "Product",
+                        action = "Category"
+                    });
+
+                endpoints.MapControllerRoute(
+                    name: "Product category vi",
+                    pattern: "{culture}/danh-muc/{id}", new
+                    {
+                        controller = "Product",
+                        action = "Category"
+                    });
+
+                endpoints.MapControllerRoute(
+                    name: "Product category en",
+                    pattern: "{culture}/product/{id}", new
+                    {
+                        controller = "Product",
+                        action = "Detail"
+                    });
+
+                endpoints.MapControllerRoute(
+                    name: "Product category en",
+                    pattern: "{culture}/san-pham/{id}", new
+                    {
+                        controller = "Product",
+                        action = "Detail"
+                    });
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{culture=vi}/{controller=Home}/{action=Index}/{id?}");

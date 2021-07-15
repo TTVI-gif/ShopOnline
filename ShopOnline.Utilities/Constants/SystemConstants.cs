@@ -6,14 +6,15 @@
 
         public class AppSettings
         {
-            public const string DefaultLanguageId = "DefaultLanguageId"; 
+            public const string DefaultLanguageId = "DefaultLanguageId";
             public const string Token = "Token";
             public const string BaseAddress = "BaseAddress";
         }
 
-        public class FeatureProducts
+        public class ProductSetting
         {
-            public const int  NumberFeatureProduct = 4;
+            public const int NumbeOfFeatureProduct = 4;
+            public const int NumberOfLatestProduct = 6;
         }
 
         public class product

@@ -25,7 +25,8 @@ namespace ShopOnline.Application.Catalog.Category
             return await query.Select(x => new CategoriesViewModel()
             {
                 Id = x.c.Id,
-                Name = x.ct.Name
+                Name = x.ct.Name,
+                ParentId = x.c.ParentId
             }).ToListAsync();
         }
     }

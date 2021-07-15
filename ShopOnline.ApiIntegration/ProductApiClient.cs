@@ -68,6 +68,26 @@ namespace ShopOnline.ApiIntegration
             return response.IsSuccessStatusCode;
         }
 
+        public async Task<bool> Delete(int productId)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri("http://localhost:5000");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.DeleteAsync($"/api/products/{productId}");
+            var body = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<bool>(body);
+
+            return JsonConvert.DeserializeObject<bool>(body);
+        }
+
+        public async Task<List<ProductViewModel>> GetaLatestProduct(string languageId, int take)
+        {
+            var data = await GetListAsync<ProductViewModel>($"/api/products/latest/{languageId}/{take}");
+            return data;
+        }
+
         public async Task<PagedResult<ProductViewModel>> GetAll(GetProductPagingRequest request)
         {
             var data = await GetAsync<PagedResult<ProductViewModel>>(
@@ -90,6 +110,9 @@ namespace ShopOnline.ApiIntegration
             var data = await GetListAsync<ProductViewModel>($"/api/products/feature/{languageId}/{take}");
             return data;
         }
+
+          
+        
 
         public async Task<bool> UpdateProduct(ProductUpdateRequest request)
         {
