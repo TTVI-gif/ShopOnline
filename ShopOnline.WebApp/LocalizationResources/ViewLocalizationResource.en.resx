@@ -145,8 +145,13 @@
     <value>Login</value>
     <comment>layout</comment>
   </data>
-  <data name="productId" xml:space="preserve">
-    <value>product</value>
+  <data name="products" xml:space="preserve">
+    <value>products</value>
+    <comment>common</comment>
+  </data>
+  <data name="products are available" xml:space="preserve">
+    <value>products are available</value>
+    <comment>category</comment>
   </data>
   <data name="productUrl" xml:space="preserve">
     <value>product</value>

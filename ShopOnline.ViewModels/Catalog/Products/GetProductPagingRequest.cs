@@ -10,7 +10,7 @@ namespace ShopOnline.ViewModels.Catalog.Products
     {
         public string KeyWord { get; set; }
         public string LanguageId { get; set; }
-        //them categoryId để tìm kiếm
+     
         public int? CategoryId { get; set; }
     }
 }

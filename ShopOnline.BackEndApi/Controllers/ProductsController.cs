@@ -10,7 +10,7 @@ namespace ShopOnline.BackEndApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+
     public class ProductsController : ControllerBase
     {
         private readonly ProductService _productService;

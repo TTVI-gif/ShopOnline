@@ -145,8 +145,9 @@
     <value>Đăng nhập</value>
     <comment>layout</comment>
   </data>
-  <data name="productId" xml:space="preserve">
-    <value>san-pham</value>
+  <data name="products are available" xml:space="preserve">
+    <value>Sản phẩm có sẵn</value>
+    <comment>Category</comment>
   </data>
   <data name="productUrl" xml:space="preserve">
     <value>san-pham</value>
@@ -154,6 +155,10 @@
   <data name="Specials Offer" xml:space="preserve">
     <value>Khuyến mãi</value>
     <comment>layout</comment>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>san-pham</value>
+    <comment>common</comment>
   </data>
   <data name="VIEW" xml:space="preserve">
     <value>Xem</value>
