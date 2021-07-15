@@ -40,5 +40,7 @@ namespace ShopOnline.Application.Catalog
         Task<ApiResult<bool>> CategoryAssign(int id, CategoryAssignRequest request);
 
         Task<List<ProductViewModel>> GetFeatureProduct(string languageId, int take);
+
+        Task<List<ProductViewModel>> GetLatestProduct(string languageId, int take);
     }
 }

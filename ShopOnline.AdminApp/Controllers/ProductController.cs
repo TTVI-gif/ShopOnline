@@ -162,5 +162,30 @@ namespace ShopOnline.AdminApp.Controllers
             }
             return categoryAssignRequest;
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            return View(new ProductDeleteRequest()
+            {
+                productId = id
+            });
+
+        }
+
+        [HttpPost]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> Delete([FromForm]ProductDeleteRequest request)
+        {
+            if (!ModelState.IsValid) return View();
+            var result = await _productApiClient.Delete(request.productId);
+            if (result)
+            {
+                TempData["result"] = "Xóa người dùng thành công";
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "Xóa người dùng không thành công");
+            return View(request);
+        }
     }
 }

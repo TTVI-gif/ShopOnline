@@ -19,13 +19,6 @@ namespace ShopOnline.BackEndApi.Controllers
             _productService = productService;
         }
 
-        /*[HttpGet("{languageId}")]
-        public async Task<IActionResult> GetAllPaging(string languageId,[FromQuery] GetPublicProductPagingRequest request)
-        {
-            var product = await _productService.GetAllByCategoryId(languageId, request);
-            return Ok(product);
-        }*/
-
         [HttpGet("paging")]
         public async Task<IActionResult> GetAllPaging([FromQuery] GetProductPagingRequest request)
         {
@@ -70,7 +63,7 @@ namespace ShopOnline.BackEndApi.Controllers
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpDelete("{productId}")]
         public async Task<IActionResult> Delete(int productId)
         {
             var result = await _productService.Delete(productId);
@@ -146,6 +139,14 @@ namespace ShopOnline.BackEndApi.Controllers
         [HttpGet("feature/{languageId}/{take}")]
         [AllowAnonymous]
         public async Task<IActionResult>GetFeatureProduct(string languageId, int take)
+        {
+            var featureProduct = await _productService.GetFeatureProduct(languageId, take);
+            return Ok(featureProduct);
+        }
+
+        [HttpGet("latest/{languageId}/{take}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetLatestProduct(string languageId, int take)
         {
             var featureProduct = await _productService.GetFeatureProduct(languageId, take);
             return Ok(featureProduct);

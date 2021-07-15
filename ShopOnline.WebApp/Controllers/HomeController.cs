@@ -31,7 +31,8 @@ namespace ShopOnline.WebApp.Controllers
             var viewModel = new HomeViewModel()
             {
                 Slides = await _slideApiClient.GetAll(),
-                ProductFeature = await _productApiClient.GetFeatureProduct(culture, SystemConstants.FeatureProducts.NumberFeatureProduct)
+                ProductFeature = await _productApiClient.GetFeatureProduct(culture, SystemConstants.ProductSetting.NumbeOfFeatureProduct),
+                LatestProduct = await _productApiClient.GetaLatestProduct(culture, SystemConstants.ProductSetting.NumberOfLatestProduct)
             };
 
             return View(viewModel);
