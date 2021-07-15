@@ -49,5 +49,10 @@ namespace ShopOnline.ApiIntegration
         {
             return await GetListAsync<CategoriesViewModel>("/api/categories?languageId=" + languageId);
         }
+
+        public async Task<CategoriesViewModel> GetById(string languageId, int id)
+        {
+            return await GetAsync<CategoriesViewModel >($"/api/categories/{id}/{languageId}");
+        }
     }
 }

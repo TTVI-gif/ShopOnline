@@ -9,5 +9,6 @@ namespace ShopOnline.ApiIntegration
     {
         Task<List<CategoriesViewModel>> GetAll(string languageId);
         Task<ApiResult<bool>> CategoryAssign(int id, CategoryAssignRequest request);
+        Task<CategoriesViewModel> GetById(string languageId, int id);
     }
 }
