@@ -42,5 +42,7 @@ namespace ShopOnline.Application.Catalog
         Task<List<ProductViewModel>> GetFeatureProduct(string languageId, int take);
 
         Task<List<ProductViewModel>> GetLatestProduct(string languageId, int take);
+
+        Task<List<ProductViewModel>> GetRelatedProducts(string languageId, int take);
     }
 }

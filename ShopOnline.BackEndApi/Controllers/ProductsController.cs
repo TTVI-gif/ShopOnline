@@ -148,7 +148,15 @@ namespace ShopOnline.BackEndApi.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetLatestProduct(string languageId, int take)
         {
-            var featureProduct = await _productService.GetFeatureProduct(languageId, take);
+            var featureProduct = await _productService.GetLatestProduct(languageId, take);
+            return Ok(featureProduct);
+        }
+
+        [HttpGet("related/{languageId}/{take}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetRelatedProduct(string languageId, int take)
+        {
+            var featureProduct = await _productService.GetRelatedProducts(languageId, take);
             return Ok(featureProduct);
         }
     }

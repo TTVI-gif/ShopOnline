@@ -17,9 +17,15 @@ namespace ShopOnline.WebApp.Controllers
             _categoryApiClient = categoryApiClient;
         }
 
-        public IActionResult Detail()
+        public async Task<IActionResult> DetailAsync(int id, string culture)
         {
-            return View();
+            var products = await _productApiClient.GetById(id, culture);
+            return View(new ProductDetailViewModel()
+            {
+                Product = products,
+                Category = await _categoryApiClient.GetById(culture, id),
+                RelatedProducts = await _productApiClient.GetRelatedProduct(culture, id)
+            });
         }
         
         public async Task<IActionResult> Category(int id, string culture, int page = 1)
