@@ -111,8 +111,12 @@ namespace ShopOnline.ApiIntegration
             return data;
         }
 
-          
-        
+        public async Task<List<ProductViewModel>> GetRelatedProduct(string languageId, int take)
+        {
+
+            var data = await GetListAsync<ProductViewModel>($"/api/products/related/{languageId}/{take}");
+            return data;
+        }
 
         public async Task<bool> UpdateProduct(ProductUpdateRequest request)
         {

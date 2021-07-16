@@ -137,6 +137,10 @@
     <value>Featured Products</value>
     <comment>/Home/index</comment>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+    <comment>/Product/Detail</comment>
+  </data>
   <data name="Latest Products" xml:space="preserve">
     <value>Latest Products</value>
     <comment>layout</comment>
@@ -144,6 +148,12 @@
   <data name="Login" xml:space="preserve">
     <value>Login</value>
     <comment>layout</comment>
+  </data>
+  <data name="More Details" xml:space="preserve">
+    <value>More Details</value>
+  </data>
+  <data name="Product Details" xml:space="preserve">
+    <value>Product Details</value>
   </data>
   <data name="products" xml:space="preserve">
     <value>products</value>
@@ -155,6 +165,9 @@
   </data>
   <data name="productUrl" xml:space="preserve">
     <value>product</value>
+  </data>
+  <data name="Related Products" xml:space="preserve">
+    <value>Related Products</value>
   </data>
   <data name="Specials Offer" xml:space="preserve">
     <value>Specials Offer</value>
