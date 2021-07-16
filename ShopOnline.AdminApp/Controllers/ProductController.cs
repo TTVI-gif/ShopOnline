@@ -174,8 +174,7 @@ namespace ShopOnline.AdminApp.Controllers
         }
 
         [HttpPost]
-        [Consumes("multipart/form-data")]
-        public async Task<IActionResult> Delete([FromForm]ProductDeleteRequest request)
+        public async Task<IActionResult> Delete(ProductDeleteRequest request)
         {
             if (!ModelState.IsValid) return View();
             var result = await _productApiClient.Delete(request.productId);

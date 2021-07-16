@@ -70,17 +70,10 @@ namespace ShopOnline.ApiIntegration
 
         public async Task<bool> Delete(int productId)
         {
-            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
-            var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri("http://localhost:5000");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
-            var response = await client.DeleteAsync($"/api/products/{productId}");
-            var body = await response.Content.ReadAsStringAsync();
-            if (response.IsSuccessStatusCode)
-                return JsonConvert.DeserializeObject<bool>(body);
-
-            return JsonConvert.DeserializeObject<bool>(body);
+            return await Delete($"/api/products/" + productId);
         }
+
+       
 
         public async Task<List<ProductViewModel>> GetaLatestProduct(string languageId, int take)
         {
