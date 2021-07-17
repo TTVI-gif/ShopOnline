@@ -25,7 +25,7 @@ namespace ShopOnline.WebApp.Controllers
             _productApiClient = productApiClient;
         }
 
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index()
         {
             var culture = CultureInfo.CurrentCulture.Name;
             var viewModel = new HomeViewModel()

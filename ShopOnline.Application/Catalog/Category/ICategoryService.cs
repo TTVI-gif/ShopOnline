@@ -8,6 +8,6 @@ namespace ShopOnline.Application.Catalog.Category
     {
         Task<List<CategoriesViewModel>> GetAll(string languageId);
 
-        Task<CategoriesViewModel> GetById(string languageId, int id);
+        Task<CategoriesViewModel> GetById(int id, string languageId);
     }
 }

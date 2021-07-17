@@ -155,6 +155,10 @@
   <data name="Product Details" xml:space="preserve">
     <value>Product Details</value>
   </data>
+  <data name="Product Information" xml:space="preserve">
+    <value>Product Information</value>
+    <comment>/product/details</comment>
+  </data>
   <data name="products" xml:space="preserve">
     <value>products</value>
     <comment>common</comment>
