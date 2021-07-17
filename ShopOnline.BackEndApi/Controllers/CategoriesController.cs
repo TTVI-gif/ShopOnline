@@ -23,9 +23,9 @@ namespace ShopOnline.BackEndApi.Controllers
 
 
         [HttpGet("{id}/{languageId}")]
-        public async Task<IActionResult> GetById(string languageId, int id)
+        public async Task<IActionResult> GetById( int id, string languageId)
         {
-            var category = await _categoryService.GetById(languageId, id);
+            var category = await _categoryService.GetById(id, languageId);
             return Ok(category);
         }
     }

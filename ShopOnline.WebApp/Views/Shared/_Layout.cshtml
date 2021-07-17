@@ -1,6 +1,7 @@
 ﻿@{
     var culture = CultureInfo.CurrentCulture.Name;
 }
+@inject Microsoft.Extensions.Configuration.IConfiguration configuration
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,8 +83,8 @@
                     </form>
                     <ul id="topMenu" class="nav pull-right">
                         <li class=""><a asp-route-culture="@culture" localize-content>Specials Offer</a></li>
-                        <li class=""><a <a asp-route-culture="@culture" localize-content>Delivery</a></li>
-                        <li class=""><a <a asp-route-culture="@culture" localize-content>Contact</a></li>
+                        <li class=""> <a asp-route-culture="@culture" localize-content>Delivery</a></li>
+                        <li class=""> <a asp-route-culture="@culture" localize-content>Contact</a></li>
                         <li class="">
                             <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success"><localize>Login</localize></span></a>
                             <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">

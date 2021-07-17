@@ -64,6 +64,7 @@ namespace ShopOnline.BackEndApi.Controllers
         }
 
         [HttpDelete("{productId}")]
+        [Authorize]
         public async Task<IActionResult> Delete(int productId)
         {
             var result = await _productService.Delete(productId);

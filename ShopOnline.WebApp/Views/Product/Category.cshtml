@@ -1,6 +1,6 @@
 ﻿@model ShopOnline.WebApp.Models.ProductCategoryViewModel
 @inject LazZiya.ExpressLocalization.ISharedCultureLocalizer _loc;
-@inject Microsoft.Extensions.Configuration.IConfiguration configuration
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 @{
     ViewData["Title"] = Model.Category.Name + (Model.Products.PageIndex == 1 ? "" : " - " + _loc["Page"] + " " + Model.Products.PageIndex);
     ViewData["Description"] = Model.Category.Name + (Model.Products.PageIndex == 1 ? "" : " - " + _loc["Page"] + " " + Model.Products.PageIndex);
@@ -10,7 +10,7 @@
 
 <ul class="breadcrumb">
     <li><a href="index.html">Home</a> <span class="divider">/</span></li>
-    <li class="active">Product Name</li>
+    <li class="active"> @Model.Category.Name</li>
 </ul>
 <h3> @Model.Category.Name <small class="pull-right"> @Model.Products.Items.Count <localize>products are available</localize></small></h3>
 <hr class="soft" />
@@ -28,19 +28,21 @@
     <div class="tab-pane" id="listView">
         @for (int i = 0; i < Model.Products.Items.Count; i++)
         {
+
             var item = Model.Products.Items[i];
+            var url = $"/{culture}/{_loc["productUrl"]}/{item.Id}";
             <div class="row">
                 <div class="span2">
-                    <img src="@(configuration["http://localhost:5000"] + @item.ThumbnailImage) " alt="@item.Name" />
+                    <img src="@(Configuration["BaseAddress"] + item.ThumbnailImage)" alt="@item.Name" />
                 </div>
                 <div class="span4">
 
                     <hr class="soft" />
                     <h5>@item.Name</h5>
                     <p>
-                        @item.Description
+                        @item.Details
                     </p>
-                    <a class="btn btn-small pull-right" href="product_details.html"><localize>Xem chi tiết</localize></a>
+                    <a class="btn btn-small pull-right" href="@url"><localize>Xem chi tiết</localize></a>
                     <br class="clr" />
                 </div>
                 <div class="span3 alignR">
@@ -50,7 +52,8 @@
                             <input type="checkbox">  Adds product to compair
                         </label><br />
 
-                        <a href="product_details.html" class="btn btn-large btn-primary"> <localize>Add to</localize> <i class=" icon-shopping-cart"></i></a>
+                        <a href="product_details.html" class="btn btn-large btn-primary"> <localize>Add to</localize>
+                        <i class=" icon-shopping-cart"></i></a>
                         <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
                     </form>
                 </div>
@@ -66,7 +69,7 @@
                 var item = Model.Products.Items[i];
                 <li class="span3">
                     <div class="thumbnail">
-                        <a href="/@culture.Name/@_loc["products"]/@item.Id"><img src="@(configuration["http://localhost:5000"]+ @item.ThumbnailImage)" alt="@item.Name" /></a>
+                        <a href="$"/{culture}/{_loc["productUrl"]}/{item.Id}"><img src="@(Configuration["BaseAddress"] + item.ThumbnailImage)" alt="@item.Name" /></a>
                         <div class="caption">
                             <h5>@item.Name</h5>
                             <p>
