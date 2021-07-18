@@ -173,6 +173,10 @@
   <data name="Related Products" xml:space="preserve">
     <value>Related Products</value>
   </data>
+  <data name="Sign in" xml:space="preserve">
+    <value>Sign in</value>
+    <comment>/login/login</comment>
+  </data>
   <data name="Specials Offer" xml:space="preserve">
     <value>Specials Offer</value>
     <comment>layout</comment>
