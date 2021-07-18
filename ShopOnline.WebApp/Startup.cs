@@ -1,4 +1,5 @@
 using LazZiya.ExpressLocalization;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -34,11 +35,21 @@ namespace ShopOnline.WebApp
 
             services.AddTransient<ICategoryApiClient, CategoryApiClient>();
 
+            services.AddTransient<IUserApiClient, UserApiClient>();
+
             var cultures = new[]
                 {
                      new CultureInfo("vi"),
                     new CultureInfo("en"),
                 };
+
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(option =>
+                {
+                    option.LoginPath = "/Account/Login";
+                    option.AccessDeniedPath = "/User/Forbidden";
+                });
 
             services.AddSession(options =>
             {
@@ -94,6 +105,8 @@ namespace ShopOnline.WebApp
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseRouting();
 

@@ -169,6 +169,9 @@
   <data name="Related Products" xml:space="preserve">
     <value>Sản phẩm liên quan</value>
   </data>
+  <data name="Sign in" xml:space="preserve">
+    <value>Đăng nhập</value>
+  </data>
   <data name="Specials Offer" xml:space="preserve">
     <value>Khuyến mãi</value>
     <comment>layout</comment>

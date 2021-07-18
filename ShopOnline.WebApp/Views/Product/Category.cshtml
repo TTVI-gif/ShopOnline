@@ -31,9 +31,10 @@
 
             var item = Model.Products.Items[i];
             var url = $"/{culture}/{_loc["productUrl"]}/{item.Id}";
+
             <div class="row">
                 <div class="span2">
-                    <img src="@(Configuration["BaseAddress"] + item.ThumbnailImage)" alt="@item.Name" />
+                    <a href="@url"><img src="@(Configuration["BaseAddress"] + item.ThumbnailImage)" alt="@item.Name" />
                 </div>
                 <div class="span4">
 
@@ -52,8 +53,10 @@
                             <input type="checkbox">  Adds product to compair
                         </label><br />
 
-                        <a href="product_details.html" class="btn btn-large btn-primary"> <localize>Add to</localize>
-                        <i class=" icon-shopping-cart"></i></a>
+                        <a href="product_details.html" class="btn btn-large btn-primary">
+                            <localize>Add to</localize>
+                            <i class=" icon-shopping-cart"></i>
+                        </a>
                         <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
                     </form>
                 </div>
@@ -67,9 +70,10 @@
             @for (int i = 0; i < Model.Products.Items.Count; i++)
             {
                 var item = Model.Products.Items[i];
+                var url = $"/{culture}/{_loc["productUrl"]}/{item.Id}";
                 <li class="span3">
                     <div class="thumbnail">
-                        <a href="$"/{culture}/{_loc["productUrl"]}/{item.Id}"><img src="@(Configuration["BaseAddress"] + item.ThumbnailImage)" alt="@item.Name" /></a>
+                        <a href="@url"><img src="@(Configuration["BaseAddress"] + item.ThumbnailImage)" alt="@item.Name" /></a>
                         <div class="caption">
                             <h5>@item.Name</h5>
                             <p>
