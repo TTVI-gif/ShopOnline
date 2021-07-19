@@ -121,13 +121,26 @@
     <value>Add to</value>
     <comment>layout</comment>
   </data>
+  <data name="BirthDay" xml:space="preserve">
+    <value>BirthDay</value>
+  </data>
+  <data name="By clicking Sign Up, you agree to our Terms, Data Policy." xml:space="preserve">
+    <value>By clicking Sign Up, you agree to our Terms, Data Policy.</value>
+  </data>
   <data name="categoryUrl" xml:space="preserve">
     <value>categoryUrl</value>
     <comment>sidebar/default</comment>
   </data>
+  <data name="Confirm Password" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
   <data name="Contact" xml:space="preserve">
     <value>Contact</value>
     <comment>layout</comment>
+  </data>
+  <data name="CREATE YOUR ACCOUNT" xml:space="preserve">
+    <value>CREATE YOUR ACCOUNT</value>
+    <comment>/account/login</comment>
   </data>
   <data name="Delivery" xml:space="preserve">
     <value>Delivery</value>
@@ -137,9 +150,23 @@
     <value>Featured Products</value>
     <comment>/Home/index</comment>
   </data>
+  <data name="First name" xml:space="preserve">
+    <value>First name</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
     <comment>/Product/Detail</comment>
+  </data>
+  <data name="Itemes in your cart" xml:space="preserve">
+    <value>Itemes in your cart</value>
+    <comment>/layout</comment>
+  </data>
+  <data name="Items in your cart" xml:space="preserve">
+    <value>Items in your cart</value>
+    <comment>/sidebar</comment>
+  </data>
+  <data name="Last name" xml:space="preserve">
+    <value>Last name</value>
   </data>
   <data name="Latest Products" xml:space="preserve">
     <value>Latest Products</value>
@@ -151,6 +178,12 @@
   </data>
   <data name="More Details" xml:space="preserve">
     <value>More Details</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Phone Number" xml:space="preserve">
+    <value>Phone Number</value>
   </data>
   <data name="Product Details" xml:space="preserve">
     <value>Product Details</value>
@@ -170,19 +203,32 @@
   <data name="productUrl" xml:space="preserve">
     <value>product</value>
   </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
   <data name="Related Products" xml:space="preserve">
     <value>Related Products</value>
   </data>
   <data name="Sign in" xml:space="preserve">
     <value>Sign in</value>
-    <comment>/login/login</comment>
+    <comment>/laccount/login</comment>
+  </data>
+  <data name="Sign up" xml:space="preserve">
+    <value>Sign up</value>
   </data>
   <data name="Specials Offer" xml:space="preserve">
     <value>Specials Offer</value>
     <comment>layout</comment>
   </data>
+  <data name="UserName" xml:space="preserve">
+    <value>UserName</value>
+  </data>
   <data name="VIEW" xml:space="preserve">
     <value>VIEW</value>
     <comment>layout</comment>
+  </data>
+  <data name="Your personal information" xml:space="preserve">
+    <value>Your personal information</value>
+    <comment>/account/register</comment>
   </data>
 </root>

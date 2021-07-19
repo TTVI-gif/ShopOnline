@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using LazZiya.ExpressLocalization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShopOnline.ApiIntegration;
+using ShopOnline.ViewModels.System.Users;
 using ShopOnline.WebApp.LocalizationResources;
 using System;
 using System.Globalization;
@@ -37,6 +39,8 @@ namespace ShopOnline.WebApp
 
             services.AddTransient<IUserApiClient, UserApiClient>();
 
+            
+
             var cultures = new[]
                 {
                      new CultureInfo("vi"),
@@ -58,6 +62,7 @@ namespace ShopOnline.WebApp
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddControllersWithViews()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>())
                 .AddExpressLocalization<ExpressLocalizationResource, ViewLocalizationResource>(ops =>
                 {
                     // When using all the culture providers, the localization process will
