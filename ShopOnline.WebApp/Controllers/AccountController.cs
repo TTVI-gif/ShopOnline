@@ -30,14 +30,18 @@ namespace ShopOnline.WebApp.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginRequest request)
         {
-             var result = await _userApiClient.Autheticate(request);
+            if (!ModelState.IsValid)
+            {
+                return View(request);
+            }
+            var result = await _userApiClient.Autheticate(request);
             if (result.ResultObj == null)
             {
-                ModelState.AddModelError(" ", result.Message);
+                ModelState.AddModelError(" ", "Đăng nhập không thành công");
                 return View();
             }
             var userPrincipal = this.ValidateToken(result.ResultObj);
@@ -46,13 +50,54 @@ namespace ShopOnline.WebApp.Controllers
                 ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
                 IsPersistent = false
             };
-           // HttpContext.Session.SetString(SystemConstants.AppSettings.DefaultLanguageId, _configuration[SystemConstants.AppSettings.DefaultLanguageId]);
-            // HttpContext.Session.SetString(SystemConstants.AppSettings.DefaultLanguageId, _configuration[SystemConstants.AppSettings.DefaultLanguageId]);
             HttpContext.Session.SetString(SystemConstants.AppSettings.Token, result.ResultObj);
             await HttpContext.SignInAsync(
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         userPrincipal,
                         authProperties);
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> Register(RegisterRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(request);
+            }
+
+            var result = await _userApiClient.RegisterUser(request);
+            if (!result.IsSuccess)
+            {
+                ModelState.AddModelError("", "Đăng kí không thành công");
+                return View();
+            }
+            var loginResult = await _userApiClient.Autheticate(new LoginRequest()
+            {
+                UserName = request.UserName,
+                PassWord = request.PassWord,
+                RememberMe = true
+            });
+
+            var userPrincipal = this.ValidateToken(loginResult.ResultObj);
+            var authProperties = new AuthenticationProperties
+            {
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                IsPersistent = false
+            };
+            HttpContext.Session.SetString(SystemConstants.AppSettings.Token, loginResult.ResultObj);
+            await HttpContext.SignInAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme,
+                        userPrincipal,
+                        authProperties);
+
             return RedirectToAction("Index", "Home");
         }
 
