@@ -14,7 +14,7 @@ namespace ShopOnline.WebApp.Models
         public List<ProductViewModel> RelatedProducts { get; set; }
 
         public List<ProductImageViewModel> ProductImages { get; set; }
-        
 
+        
     }
 }

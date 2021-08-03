@@ -1,24 +1,45 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿var SiteController = function () {
+    this.initialize = function () {
+        regsiterEvents();
+        loadCart();
+    }
 
-// Write your JavaScript code.
+    function loadCart() {
+        const cultule = $('#hidculture').val();
+        $.ajax({
+            type: "GET",
+            url: "/" + cultule + '/Cart/GetListItem',
 
-$('body').on('click', '.btn-add-cart', function (e) {
-    e.preventDefault();
-    const cultule = $('#hidculture').val();
-    const id = $(this).data('id');
-    $.ajax({
-        type: "POST",
-        url: "/" + cultule + '/Cart/AddToCart',
-        data: {
-            id: id,
-            languageId: cultule
-        },
-        success: function (res) {
-            console.log(res)
-        },
-        error: function (err) {
-            console.log(err);
-        }
-    });
-})
+            success: function (res) {
+                $('#lbl_number_items_header').text(res.length);
+            }
+        });
+    }
+
+    function regsiterEvents() {
+        $('body').on('click', '.btn-add-cart', function (e) {
+            e.preventDefault();
+            const culture = $('#hidculture').val();
+            const id = $(this).data('id');
+            $.ajax({
+                type: "POST",
+                url: "/" + culture + '/Cart/AddToCart',
+                data: {
+                    id: id,
+                    languageId: culture
+                },
+                success: function (res) {
+                    $('#lbl_number_items_header').text(res.length);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        });
+    }
+}
+
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
