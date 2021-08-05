@@ -23,8 +23,4 @@
 		<ProjectReference Include="..\ShopOnline.ViewModels\ShopOnline.ViewModels.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="wwwroot\user-content\" />
-	</ItemGroup>
-
 </Project>
