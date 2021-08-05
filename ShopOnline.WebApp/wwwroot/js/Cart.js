@@ -1,5 +1,4 @@
-﻿
-var CartController = function () {
+﻿var CartController = function () {
     this.initialize = function () {
         loadData();
     }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using ShopOnline.ApiIntegration;
 using ShopOnline.Utilities.Constants;
+using ShopOnline.ViewModels.Sales;
 using ShopOnline.WebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -55,7 +56,7 @@ namespace ShopOnline.WebApp.Controllers
         }
 
         [HttpGet]
-        public  IActionResult GetListItem()
+        public IActionResult GetListItem()
         {
             var session = HttpContext.Session.GetString(SystemConstants.CartSession);
             List<CartItemViewModel> currentCart = new List<CartItemViewModel>();
@@ -63,6 +64,51 @@ namespace ShopOnline.WebApp.Controllers
                 currentCart = JsonConvert.DeserializeObject<List<CartItemViewModel>>(session);
 
             return Ok(currentCart);
+        }
+
+        
+        public IActionResult CheckoutCart()
+        {
+            return View(GetCheckoutViewModel());
+        }
+
+        [HttpPost]
+        public IActionResult CheckoutCart(CheckoutViewModel request)
+        {
+            var model = GetCheckoutViewModel();
+            var orderDetails = new List<OrderDetailViewModel>();
+            foreach (var item in model.CartItems)
+            {
+                orderDetails.Add(new OrderDetailViewModel()
+                {
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity
+                });
+            }
+            var checkoutRequest = new CheckoutRequest()
+            {
+                ShipAddress = request.CheckoutModel.ShipAddress,
+                Name = request.CheckoutModel.Name,
+                ShipEmail = request.CheckoutModel.ShipEmail,
+                ShipPhoneNumber = request.CheckoutModel.ShipPhoneNumber,
+                OrderDetails = orderDetails
+            };
+            TempData["SuccessMsg"] = "Order puschased successful";
+            return View(model);
+        }
+
+        private CheckoutViewModel GetCheckoutViewModel()
+        {
+            var session = HttpContext.Session.GetString(SystemConstants.CartSession);
+            List<CartItemViewModel> currentCart = new List<CartItemViewModel>();
+            if (session != null)
+                currentCart = JsonConvert.DeserializeObject<List<CartItemViewModel>>(session);
+            var checkoutVm = new CheckoutViewModel()
+            {
+                CartItems = currentCart,
+                CheckoutModel = new CheckoutRequest()
+            };
+            return checkoutVm;
         }
     }
 }

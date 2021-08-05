@@ -34,7 +34,7 @@
 
             <div class="row">
                 <div class="span2">
-                    <a href="@url"><img src="@(Configuration["BaseAddress"] + item.ThumbnailImage)" alt="@item.Name" />
+                    <a href="@url"><img src="@(Configuration["BaseAddress"] + item.ThumbnailImage)" alt="@item.Name" /></a>
                 </div>
                 <div class="span4">
 
@@ -43,7 +43,7 @@
                     <p>
                         @Html.Raw(item.Details)
                     </p>
-                    <a class="btn btn-small pull-right" href="@url"><localize>Xem chi tiết</localize></a>
+                    <a class="btn btn-small pull-right" href="@url"><localize>Xem</localize></a>
                     <br class="clr" />
                 </div>
                 <div class="span3 alignR">

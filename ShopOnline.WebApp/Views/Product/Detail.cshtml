@@ -6,6 +6,7 @@
 @inject LazZiya.ExpressLocalization.ISharedCultureLocalizer _loc;
 @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 
+
 <ul class="breadcrumb">
     <li><a href="index.html"><localize>Home</localize></a> <span class="divider">/</span></li>
     <li class="active">@Model.Product.Name</li>
@@ -59,30 +60,32 @@
                         <i class=" icon-shopping-cart"></i>
                     </button>
                 </div>
+
+            </div>
+            <div class="control-group">
+                <p>Sau khi Quý Khách đặt hàng xong, bộ phận CSKH sẽ liên lạc để xác nhận đơn hàng. 
+                Hoặc Quý Khách có thể gọi Tổng đài để xác nhận quá trình mua hàng nhanh chóng hơn</p>
+            </div>
+            <div class="control-group">
+                <span style="box-sizing: border-box">
+                    Hotline:
+                    <span style="color: #fdc916; font-weight: bold; font-size:medium;">
+                        034.526.9963
+                    </span>
+                    (9:00-19:00) mỗi ngày
+                </span>
+            </div>
+            <div class="control-group">
+                <span style="box-sizing: border-box">
+                    <span style="font-weight:bold;">FREESHIP TOÀN QUỐC</span>
+                    (Áp đụng cho ĐH thông thường trị giá >400k)
+                </span>
+                
             </div>
         </form>
 
 
-
-        @*<form class="form-horizontal qtyFrm pull-right">
-                <div class="control-group">
-                    <label class="control-label"><span>Color</span></label>
-                    <div class="controls">
-                        <select class="span2">
-                            <option>Black</option>
-                            <option>Red</option>
-                            <option>Blue</option>
-                            <option>Brown</option>
-                        </select>
-                    </div>
-                </div>
-            </form>*@
-
-
-        @* <a class="btn btn-small pull-right" href="#detail"><localize>More Details</localize></a>
-            <br class="clr" />
-            <a href="#" name="detail"></a>
-            <hr class="soft" />*@
+      
     </div>
 
     <div class="span9">
@@ -91,7 +94,7 @@
             <li><a href="#profile" data-toggle="tab"><localize>Related Products</localize></a></li>
         </ul>
         <div id="myTabContent" class="tab-content">
-            <div class="tab-pane fade active in" id="home" >
+            <div class="tab-pane fade active in" id="home">
                 <h4><localize>Product Information</localize></h4>
                 @Html.Raw(@Model.Product.Description)
             </div>
