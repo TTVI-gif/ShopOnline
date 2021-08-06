@@ -9,5 +9,7 @@ namespace ShopOnline.WebApp.Models
         public List<SlideViewModel> Slides { get; set; }
         public List<ProductViewModel> ProductFeature { get; set; }
         public List<ProductViewModel> LatestProduct { get; set; }
+
+        public List<ProductViewModel> ProductSearch { get; set; }
     }
 }

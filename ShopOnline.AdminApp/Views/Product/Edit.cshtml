@@ -6,8 +6,10 @@
 }
 
 @section Scripts{
-
+    <script src="/js/Jquery-2.2.4.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+    <script src="/assets/ckfinder/ckfinder.js"></script>
+    
 
     <script>
         ClassicEditor
@@ -33,6 +35,17 @@
                 console.error(err.stack);
             });
     </script>
+    <script>
+        var finder = new CKFinder();
+        $('#cmdSelect').on('click', function () {
+            finder.selectActionFunction = function (fileUrl) {
+                $('#img').val(fileUrl);
+            };
+            finder.popup();
+        });
+
+    </script>
+
 }
 
 <div class="container-fluid">
@@ -79,6 +92,11 @@
                     <label asp-for="ThumbaiImage" class="control-label"></label>
                     <input asp-for="ThumbaiImage" type="file" class="form-control" />
                     <span asp-validation-for="ThumbaiImage" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Thêm ảnh</label>
+                    <img id="img" src="" />
+                    <input type="file" id="cmdSelect" value="select" class="form-control" />
                 </div>
 
                 <div class="form-group">
