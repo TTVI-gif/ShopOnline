@@ -1,0 +1,42 @@
+﻿@model HomeViewModel
+@inject LazZiya.ExpressLocalization.ISharedCultureLocalizer _loc;
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration;
+@{
+    ViewData["Title"] = "Index";
+    var culture = CultureInfo.CurrentCulture;
+}
+
+
+<ul class="breadcrumb">
+    <li class="active">Tìm kiếm:</li>
+    <li class="active"> @ViewBag.keyword</li>
+</ul>
+<ul class="thumbnails">
+    
+    @foreach (var item in Model.ProductFeature)
+    {
+        var url = $"/{culture}/{_loc["productUrl"]}/{item.Id}";
+        @if (item.Name == @ViewBag.keyword)
+        {
+            <li class="span3">
+                <div class="thumbnail">
+                    <a href="@url"><img src="@(Configuration["BaseAddress"] + item.ThumbnailImage)" alt="" /></a>
+                    <div class="caption">
+                        <h5>@item.Name</h5>
+                        <h4 style="text-align:center">
+                            <a class="btn" href="@url">
+                                <i class="icon-zoom-in"></i>
+                            </a>
+                            <a class="btn" href="#"><localize>Add to</localize> <i class="icon-shopping-cart"></i></a>
+                            <a class="btn btn-primary" href="#">@item.Price</a>
+                        </h4>
+                    </div>
+                </div>
+            </li>
+        }
+
+    }
+
+
+</ul>
+

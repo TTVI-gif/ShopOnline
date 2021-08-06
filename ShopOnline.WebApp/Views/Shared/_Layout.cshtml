@@ -78,17 +78,9 @@
                 </a>
                 <div class="navbar-inner">
                     <a class="brand" asp-action="Index" asp-controller="Home"><img src="/themes/images/logo.png" alt="Bootsshop" /></a>
-                    <form class="form-inline navbar-search" method="post" action="products.html">
-                        <input id="srchFld" class="srchTxt" type="text" />
-                        <select class="srchTxt">
-                            <option>All</option>
-                            <option>CLOTHES </option>
-                            <option>FOOD AND BEVERAGES </option>
-                            <option>HEALTH & BEAUTY </option>
-                            <option>SPORTS & LEISURE </option>
-                            <option>BOOKS & ENTERTAINMENTS </option>
-                        </select>
-                        <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
+                    <form class="form-inline navbar-search" method="get" asp-action="Index" asp-controller="Search" >
+                        <input id="srchFld"  type="text" value="@ViewBag.keyword" name="keyword" class="srchTxt" style="width:370px"/>     
+                        <button type="submit" id="submitButton" class="btn btn-primary">Tìm Kiếm</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
                         <li class=""><a asp-route-culture="@culture" localize-content>Specials Offer</a></li>
