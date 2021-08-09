@@ -37,6 +37,7 @@ namespace ShopOnline.BackEndApi.Controllers
 
         [HttpPost]
         [Consumes("multipart/form-data")]
+        [Authorize]
         public async Task<IActionResult> Create([FromForm]ProductCreateRequest request)
         {
             if (!ModelState.IsValid)
@@ -50,6 +51,7 @@ namespace ShopOnline.BackEndApi.Controllers
 
         [HttpPut("{productId}")]
         [Consumes("multipart/form-data")]
+        [Authorize]
         public async Task<IActionResult> Update([FromRoute]int productId,[FromForm] ProductUpdateRequest request)
         {
             if (!ModelState.IsValid)

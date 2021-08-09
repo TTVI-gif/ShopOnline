@@ -35,16 +35,7 @@
                 console.error(err.stack);
             });
     </script>
-    <script>
-        var finder = new CKFinder();
-        $('#cmdSelect').on('click', function () {
-            finder.selectActionFunction = function (fileUrl) {
-                $('#img').val(fileUrl);
-            };
-            finder.popup();
-        });
-
-    </script>
+  
 
 }
 
@@ -65,27 +56,27 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Description" class="control-label"></label>
-                    <textarea asp-for="Description" rows="5" id="txt_description" class="form-control"></textarea>
+                    <textarea asp-for="Description" rows="10" id="txt_description" class="form-control"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Details" class="control-label"></label>
-                    <textarea asp-for="Details" id="txt_details" class="form-control"></textarea>
+                    <textarea asp-for="Details" rows="10" id="txt_details" class="form-control"></textarea>
                     <span asp-validation-for="Details" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="SeoDescription" class="control-label"></label>
-                    <textarea asp-for="SeoDescription" rows="5" class="form-control"></textarea>
+                    <textarea asp-for="SeoDescription" rows="10" class="form-control"></textarea>
                     <span asp-validation-for="SeoDescription" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="SeoTitle" class="control-label"></label>
-                    <input asp-for="SeoTitle" class="form-control" />
+                    <input asp-for="SeoTitle" row="10" class="form-control" />
                     <span asp-validation-for="SeoTitle" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="SeoAlias" class="control-label"></label>
-                    <input asp-for="SeoAlias" class="form-control" />
+                    <input asp-for="SeoAlias" row="10" class="form-control" />
                     <span asp-validation-for="SeoAlias" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -93,11 +84,7 @@
                     <input asp-for="ThumbaiImage" type="file" class="form-control" />
                     <span asp-validation-for="ThumbaiImage" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label>Thêm ảnh</label>
-                    <img id="img" src="" />
-                    <input type="file" id="cmdSelect" value="select" class="form-control" />
-                </div>
+                
 
                 <div class="form-group">
                     <button type="submit" value="Update" class="btn btn-primary">Cập nhật</button>

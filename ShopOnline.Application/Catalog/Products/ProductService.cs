@@ -88,7 +88,6 @@ namespace ShopOnline.Application.Catalog.Products
             }
             var product = new Product()
             {
-
                 Price = request.Price,
                 Stock = request.Stock,
                 OriginalPrice = request.OriginalPrice,

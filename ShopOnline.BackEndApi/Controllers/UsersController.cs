@@ -36,7 +36,8 @@ namespace ShopOnline.BackEndApi.Controllers
         }
 
         [HttpPost("Register")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
+        [Authorize(Roles  ="admin")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -70,6 +71,7 @@ namespace ShopOnline.BackEndApi.Controllers
         }
 
         [HttpPut("{id}/roles")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> RoleAssign(Guid id, [FromBody] RoleAssignRequest request)
         {
             if (!ModelState.IsValid)

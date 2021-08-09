@@ -70,6 +70,14 @@ namespace ShopOnline.BackEndApi
                 .AddEntityFrameworkStores<EshopDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.ConfigureApplicationCookie(options => {
+                // options.Cookie.HttpOnly = true;
+                // options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.LoginPath = $"/login/";
+                options.LogoutPath = $"/logout/";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "S wagger EshopSolution", Version = "v1" });

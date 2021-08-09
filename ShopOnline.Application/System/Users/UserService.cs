@@ -28,8 +28,6 @@ namespace ShopOnline.Application.System.Users
             _roleManager = roleManager;
             _config = config;
         }
-
-
         public async Task<ApiResult<string>> AuthenCate(LoginRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);

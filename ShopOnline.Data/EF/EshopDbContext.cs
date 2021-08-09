@@ -5,7 +5,6 @@ using ShopOnline.Data.Configurations;
 using ShopOnline.Data.Entities;
 using ShopOnline.Data.Extension;
 using System;
-
 namespace ShopOnline.Data.EF
 {
     public class EshopDbContext : IdentityDbContext<AppUser,AppRole,Guid>
@@ -47,21 +46,20 @@ namespace ShopOnline.Data.EF
 
             modelBuilder.ApplyConfiguration(new ProductImageConfi());
 
-            modelBuilder.ApplyConfiguration(new AppRoleConfi());
-            
+            modelBuilder.ApplyConfiguration(new AppRoleConfi()); 
+
             modelBuilder.ApplyConfiguration(new SlideConfi());
 
             modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
 
             modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new { x.UserId, x.RoleId });
-            
+
             modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
 
-            modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
-            
+            modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");  
+
             modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
             //base.OnModelCreating(modelBuilder);
-
             //data seeding
             modelBuilder.Seed();
         }
