@@ -39,12 +39,22 @@ namespace ShopOnline.AdminApp
                 .AddCookie(option =>
                 {
                     option.LoginPath = "/Login/Index";
-                    option.AccessDeniedPath = "/User/Forbidden";
+                    option.AccessDeniedPath = "/Home/Forbidden";
                 });
+
+           /* services.ConfigureApplicationCookie(options => {
+                // options.Cookie.HttpOnly = true;
+                // options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.LoginPath = "/Login/Index";
+                // options.LogoutPath = $"/logout/";
+                options.AccessDeniedPath = "/User/Forbidden";
+            });*/
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.Name = "shopOnline.BootShop";
+                options.IdleTimeout = TimeSpan.FromMinutes(2);
+                
             });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -69,7 +79,7 @@ namespace ShopOnline.AdminApp
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+               app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();

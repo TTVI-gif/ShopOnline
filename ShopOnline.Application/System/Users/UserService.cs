@@ -31,10 +31,10 @@ namespace ShopOnline.Application.System.Users
         public async Task<ApiResult<string>> AuthenCate(LoginRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
-            if (user == null) return new ApiErrorResult<string>("Tài khoản không tồn tại");
+            if (user == null) return new ApiErrorResult<string>("Tên đăng nhập, mật khẩu không đúng");
 
             var result = await _signInManager.PasswordSignInAsync(user, request.PassWord, request.RememberMe, true);
-            if (!result.Succeeded)
+            if (!result.Succeeded )
             {
                 return new ApiErrorResult<string>("Tên đăng nhập, mật khẩu không đúng");
             }
