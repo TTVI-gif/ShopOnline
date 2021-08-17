@@ -99,14 +99,12 @@ namespace ShopOnline.AdminApp.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
-
             var result = await _userApiClient.RegisterUser(request);
             if (result.IsSuccess)
             {
                 TempData["result"] = "Thêm người dùng thành công";
                 return RedirectToAction("Index");
             }
-
             ModelState.AddModelError("", result.Message);
             return View(request);
         }
@@ -161,11 +159,17 @@ namespace ShopOnline.AdminApp.Controllers
 
             var result = await _userApiClient.RoleAssign(request.Id, request);
 
+             if(result == null)
+            {
+                return RedirectToAction("Forbidden", "Home");
+            }    
+
             if (result.IsSuccess)
             {
                 TempData["result"] = "Cập nhật quyền thành công";
                 return RedirectToAction("Index");
             }
+           
 
             ModelState.AddModelError("", result.Message);
             var roleAssignRequest = await GetRoleAssignRequest(request.Id);
@@ -189,5 +193,7 @@ namespace ShopOnline.AdminApp.Controllers
             }
             return roleAssignRequest;
         }
+
+        
     }
 }

@@ -39,7 +39,7 @@ namespace ShopOnline.WebApp
 
             services.AddTransient<IUserApiClient, UserApiClient>();
 
-            
+            services.AddResponseCaching();
 
             var cultures = new[]
                 {
@@ -159,6 +159,7 @@ namespace ShopOnline.WebApp
                     name: "default",
                     pattern: "{culture=vi}/{controller=Home}/{action=Index}/{id?}");
             });
+            app.UseResponseCaching();
         }
     }
 }

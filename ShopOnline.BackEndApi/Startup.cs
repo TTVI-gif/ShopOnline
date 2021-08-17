@@ -20,6 +20,7 @@ using ShopOnline.Application.Utilities.Slides;
 using ShopOnline.Data.EF;
 using ShopOnline.Data.Entities;
 using ShopOnline.ViewModels.System.Users;
+using System;
 using System.Collections.Generic;
 
 namespace ShopOnline.BackEndApi
@@ -65,18 +66,16 @@ namespace ShopOnline.BackEndApi
 
             services.AddControllersWithViews().AddFluentValidation()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
-            
-            services.AddIdentity<AppUser, AppRole>()
-                .AddEntityFrameworkStores<EshopDbContext>()
-                .AddDefaultTokenProviders();
 
-            services.ConfigureApplicationCookie(options => {
-                // options.Cookie.HttpOnly = true;
-                // options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-                options.LoginPath = $"/login/";
-                options.LogoutPath = $"/logout/";
-                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
-            });
+            services.AddIdentity<AppUser, AppRole>(opt => {
+                opt.Lockout.AllowedForNewUsers = true;
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+                opt.Lockout.MaxFailedAccessAttempts = 3;
+            }).AddEntityFrameworkStores<EshopDbContext>()
+            .AddDefaultTokenProviders();
+
+
+            services.AddResponseCaching();
 
             services.AddSwaggerGen(c =>
             {
@@ -176,6 +175,8 @@ namespace ShopOnline.BackEndApi
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseResponseCaching();
         }
     }
 }

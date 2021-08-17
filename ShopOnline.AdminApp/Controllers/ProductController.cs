@@ -24,19 +24,16 @@ namespace ShopOnline.AdminApp.Controllers
             _productApiClient = productApiClient;
             _categoryApiClient = categoryApiClient;
         }
-
         public async Task<IActionResult> Index(string keyword,int? categoryId, int pageIndex = 1, int pageSize = 10)
         {
             var languageId = HttpContext.Session.GetString(SystemConstants.AppSettings.DefaultLanguageId);
-
             var request = new GetProductPagingRequest()
             {
                 KeyWord = keyword,
                 PageIndex = pageIndex,
                 PageSize = pageSize,
                 LanguageId = languageId,
-                CategoryId = categoryId
-                
+                CategoryId = categoryId                
             };
             var data = await _productApiClient.GetAll(request);
             var category = await _categoryApiClient.GetAll(languageId);

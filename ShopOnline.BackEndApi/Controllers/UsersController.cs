@@ -36,8 +36,8 @@ namespace ShopOnline.BackEndApi.Controllers
         }
 
         [HttpPost("Register")]
-        //[AllowAnonymous]
-        [Authorize(Roles  ="admin")]
+        [AllowAnonymous]
+        
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
