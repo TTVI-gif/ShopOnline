@@ -8,6 +8,7 @@ namespace ShopOnline.BackEndApi
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+            //.UseSetting("https_port", "443");
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -15,6 +16,7 @@ namespace ShopOnline.BackEndApi
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    //.UseSetting("https_port", "443");
                 });
     }
 }

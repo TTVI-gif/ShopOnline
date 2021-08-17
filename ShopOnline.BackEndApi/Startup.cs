@@ -72,7 +72,10 @@ namespace ShopOnline.BackEndApi
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
                 opt.Lockout.MaxFailedAccessAttempts = 3;
             }).AddEntityFrameworkStores<EshopDbContext>()
-            .AddDefaultTokenProviders(); 
+            .AddDefaultTokenProviders();
+
+
+            services.AddResponseCaching();
 
             services.AddSwaggerGen(c =>
             {
@@ -172,6 +175,8 @@ namespace ShopOnline.BackEndApi
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseResponseCaching();
         }
     }
 }

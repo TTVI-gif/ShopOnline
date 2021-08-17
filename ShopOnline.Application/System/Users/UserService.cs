@@ -30,14 +30,23 @@ namespace ShopOnline.Application.System.Users
         }
         public async Task<ApiResult<string>> AuthenCate(LoginRequest request)
         {
+            
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null) return new ApiErrorResult<string>("Tên đăng nhập, mật khẩu không đúng");
 
             var result = await _signInManager.PasswordSignInAsync(user, request.PassWord, request.RememberMe, true);
-            if (!result.Succeeded )
+            if (result.IsLockedOut)
             {
-                return new ApiErrorResult<string>("Tên đăng nhập, mật khẩu không đúng");
+                return new ApiErrorResult<string>("Tài khoản tạm thời bị khóa");
             }
+            if (!result.Succeeded )
+            {    
+                return new ApiErrorResult<string>("Tên đăng nhập, mật khẩu ");
+            }
+            if(result.IsLockedOut)
+            {
+                return new ApiErrorResult<string>("Tài khoản tạm thời bị khóa");
+            }    
             var roles = await _userManager.GetRolesAsync(user);
             var claims = new[]
             {
